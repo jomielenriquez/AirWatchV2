@@ -1,0 +1,67 @@
+﻿@model AirWatch.Models.LoginModel
+@{
+    ViewBag.Title = "Sign In";
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+
+<div class="image-container">
+    <img src="~/Image/Malvar_Logo.png" class="logo"/>
+</div>
+<div class="alert alert-success col-lg-4">
+    @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @name = "LoginForm" }))
+    {
+        <fieldset>
+            <legend>Air Quality Monitoring MENRO Malvar</legend>
+            <div class="form-group">
+                <label for="inputUsername" class="form-label mt-4">Username</label>
+                @Html.TextBoxFor(model => model.username, new { @id = "inputUsername", @class = "form-control", @placeholder = "Username", @type = "text"})
+            </div>
+            <div class="form-group">
+                <label for="inputPassword" class="form-label mt-4">Password</label>
+                @Html.TextBoxFor(model => model.password, new { @id = "inputPassword", @class = "form-control", @placeholder = "Password", @type = "password" })
+            </div>
+        </fieldset>
+        <button type="button" class="btn btn-link">Forgot Password</button>
+        <br />
+        <button type="submit" class="btn btn-primary">Login</button>
+    }
+</div>
+<div class="alert alert-dismissible alert-danger col-lg-4" style="display: @(Model.ErrorMessage!=null ? "block":"none")">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <h4 class="alert-heading">Error!</h4>
+    <p class="mb-0">@Model.ErrorMessage</p>
+</div>
+
+<style>
+    .alert{
+        margin:5px auto auto auto;
+    }
+    input{
+        max-width:none !important;
+    }
+    legend{
+        text-align:center !important;
+    }
+    .btn-primary {
+        width: 100%;
+    }
+    .logo{
+        top:0;
+        height:100px;
+        width:100px;
+    }
+
+    @@media  (max-width: 1000px) {
+        .image-container {
+            display:flex;
+            justify-content:center;
+            align-items: center;
+        }
+        .alert{
+            margin: auto auto auto auto;
+        }
+        .alert-dismissible{
+            margin-top:10px;
+        }
+    }
+</style>

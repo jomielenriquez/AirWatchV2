@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AirWatchDBModelStoreContainer" CdmEntityContainer="AirWatchDBEntities">
+    <EntitySetMapping Name="TBL_ACCOUNTS">
+      <EntityTypeMapping TypeName="AirWatchDBModel.TBL_ACCOUNTS">
+        <MappingFragment StoreEntitySet="TBL_ACCOUNTS">
+          <ScalarProperty Name="ACCOUNTID" ColumnName="ACCOUNTID" />
+          <ScalarProperty Name="FIRSTNAME" ColumnName="FIRSTNAME" />
+          <ScalarProperty Name="MIDDLENAME" ColumnName="MIDDLENAME" />
+          <ScalarProperty Name="LASTNAME" ColumnName="LASTNAME" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="UPDATEDDATE" ColumnName="UPDATEDDATE" />
+          <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

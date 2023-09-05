@@ -1,0 +1,21 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/AirWatch/FileContentIndex/15e212e1-4188-4894-b5fb-6bc46b61bd5c.vsidx
+/.vs/AirWatch/FileContentIndex/1cde0f0a-a0d9-42b8-9a06-a78e1615fb1d.vsidx
+/.vs/AirWatch/FileContentIndex/55315a05-c4c3-44c0-ad17-433c422a639b.vsidx
+/.vs/AirWatch/FileContentIndex/710be3b8-b0ac-4e4b-b2fe-657c891f0b98.vsidx
+/.vs/AirWatch/FileContentIndex/86d28194-b0ec-4dd4-ad1c-633d44c0c123.vsidx
+/.vs/AirWatch/FileContentIndex/ccaf09a4-c1f8-4bbd-bd07-fb1045215dae.vsidx
+/AirWatch/bin/AirWatch.dll
+/AirWatch/bin/AirWatch.pdb
+/AirWatch/obj/Debug/AirWatch.csproj.CoreCompileInputs.cache
+/AirWatch/obj/Debug/AirWatch.dll
+/AirWatch/obj/Debug/AirWatch.pdb
+/AirWatch/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/.vs/AirWatch/v17/.suo
+/.vs/AirWatch/FileContentIndex/21120504-590c-4166-9897-d4b196d0e18c.vsidx
+/.vs/AirWatch/FileContentIndex/31087b27-543c-4cbb-98e3-591fa252c3df.vsidx
+/.vs/AirWatch/FileContentIndex/a170493e-8d0a-4df1-9338-18c1ade283c9.vsidx
+/.vs/AirWatch/FileContentIndex/f2ad7e12-255e-45b5-a14c-d6890be9ef4c.vsidx
