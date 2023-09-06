@@ -13,13 +13,13 @@ namespace AirWatch.Controllers
         public ActionResult Index()
         {
             // This code will return user to the login page if there is no session
-            TBL_ACCOUNTS account = Session["currentUserAccount"] as TBL_ACCOUNTS;
-            if (account == null)
+            AppModel appModel = new AppModel();
+            if (appModel.Account == null)
             {
                 return RedirectToAction("../Login/SignIn");
             }
 
-            return View();
+            return View(appModel);
         }
 
         public ActionResult About()

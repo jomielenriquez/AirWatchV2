@@ -34,6 +34,47 @@ namespace AirWatch.Controllers
                 return RedirectToAction("SignIn");
             }
             Session["currentUserAccount"] = tbl_Accounts;
+            Session["AccountID"] = tbl_Accounts.ACCOUNTID;
+            return RedirectToAction("../Home/Index");
+        }
+        public ActionResult Logout()
+        {
+            TBL_ACCOUNTS account = Session["currentUserAccount"] as TBL_ACCOUNTS;
+            LoginModel current = new LoginModel();
+            current.username = account.USERNAME;
+            Session["currentUserLoginModel"] = current;
+            Session.Remove("currentUserAccount");
+            return RedirectToAction("SignIn");
+        }
+        [HttpPost]
+        public ActionResult ChangePassword(AppModel model)
+        {
+            AppModel appModel = new AppModel();
+            if (appModel.Account == null)
+            {
+                return RedirectToAction("../Login/SignIn");
+            }
+
+            if(model.ChangePass.firstPass != model.ChangePass.secondPass)
+            {
+                Session["Message"] = "Password does not matched";
+                Session["Type"] = "error";
+            }
+            else
+            {
+                Data data = new Data();
+                TBL_ACCOUNTS currentAccount = appModel.Account;
+                currentAccount.ACCOUNTID = new Guid();
+                currentAccount.PASSWORD = model.ChangePass.firstPass;
+
+                TBL_ACCOUNTS filter = new TBL_ACCOUNTS();
+                filter.ACCOUNTID = appModel.AccountID;
+                string message = data.Update(currentAccount, filter, appModel.AccountID);
+
+                Session["Message"] = "New password successfully saved.";
+                Session["Type"] = "success";
+            }
+
             return RedirectToAction("../Home/Index");
         }
     }
