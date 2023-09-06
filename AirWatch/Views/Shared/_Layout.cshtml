@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -15,85 +16,59 @@
 
         @* end *@
         @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark fixed-left">
-            <div class="container">
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    </ul>
+                <div class="container">
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>*@
+            </nav>*@
         <nav id="sidebar">
-            <div class="sidebar-header">
-                <h3>AirWatch</h3>
-            </div>
 
             <ul class="list-unstyled components">
-                <p>Dummy Heading</p>
+                @*<p>Main Menu</p>*@
                 <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                    <a href="#"><i class="fa fa-home" aria-hidden="true"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-download" aria-hidden="true"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i></a>
+                </li>
+                @*<li>
+                    <a href="#"><i class="fa fa-cog" aria-hidden="true"></i></a>
+                </li>*@
+                <li>
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cog" aria-hidden="true"></i></a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <a href="#">Home 1</a>
+                            <a href="#"><i class="fa fa-key" aria-hidden="true"></i></a>
                         </li>
                         <li>
-                            <a href="#">Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
+                            <a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
                         </li>
                     </ul>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="#">Page 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 3</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Portfolio</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
                 </li>
             </ul>
-
-            @*<ul class="list-unstyled CTAs">
-                <li>
-                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
-                </li>
-                <li>
-                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
-                </li>
-            </ul>*@
         </nav>
 
         <div id="content" class="container body-content height-100 bg-light">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fas fa-align-left"></i>
-                        <span>Toggle Sidebar</span>
+                    <button type="button" id="sidebarCollapse" class="btn btn-info toggle-btn">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
                     </button>
+
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-align-justify"></i>
                     </button>
@@ -101,17 +76,17 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">Page</a>
+                                <a class="nav-link" href="#"><h3>AirWatch</h3></a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
+                            @*<li class="nav-item">
+                                    <a class="nav-link" href="#">Page</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Page</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Page</a>
+                                </li>*@
                         </ul>
                     </div>
                 </div>
@@ -130,175 +105,195 @@
 </body>
 </html>
 <style>
-    /*
-    DEMO STYLE
-*/
+        /*
+        DEMO STYLE
+    */
 
-@@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
-    body {
-        font-family: 'Poppins', sans-serif;
-        background: white;
-    }
+        @@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
-p {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.1em;
-    font-weight: 300;
-    line-height: 1.7em;
-    color: #999;
-}
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f9fa;
+        }
 
-a,
-a:hover,
-a:focus {
-    color: inherit;
-    text-decoration: none;
-    transition: all 0.3s;
-}
+        p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1em;
+            font-weight: 300;
+            line-height: 1.7em;
+            color: #999;
+        }
 
-    .navbar {
-        padding: 15px 10px;
-        background: #87a96c;
-        border: none;
-        border-radius: 0;
-        margin-bottom: 40px;
-        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    }
+        a,
+        a:hover,
+        a:focus {
+            color: inherit;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
 
-.navbar-btn {
-    box-shadow: none;
-    outline: none !important;
-    border: none;
-}
-
-.line {
-    width: 100%;
-    height: 1px;
-    border-bottom: 1px dashed #ddd;
-    margin: 40px 0;
-}
-
-/* ---------------------------------------------------
-    SIDEBAR STYLE
------------------------------------------------------ */
-
-.wrapper {
-    display: flex;
-    width: 100%;
-    align-items: stretch;
-}
-
-    #sidebar {
-        min-width: 250px;
-        max-width: 250px;
-        background: #87a96c;
-        color: #fff;
-        transition: all 0.3s;
-    }
-
-#sidebar.active {
-    margin-left: -250px;
-}
-
-        #sidebar .sidebar-header {
-            padding: 20px;
+        .navbar {
+            padding: 15px 10px;
             background: #87a96c;
+            border: none;
+            border-radius: 0;
+            margin-bottom: 40px;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
         }
 
-        #sidebar ul.components {
-            padding: 20px 0;
-            border-bottom: 1px solid #87a96c;
+        .navbar-btn {
+            box-shadow: none;
+            outline: none !important;
+            border: none;
         }
 
-#sidebar ul p {
-    color: #fff;
-    padding: 10px;
-}
+        .line {
+            width: 100%;
+            height: 1px;
+            border-bottom: 1px dashed #ddd;
+            margin: 40px 0;
+        }
 
-#sidebar ul li a {
-    padding: 10px;
-    font-size: 1.1em;
-    display: block;
-}
+        /* ---------------------------------------------------
+        SIDEBAR STYLE
+    ----------------------------------------------------- */
 
-#sidebar ul li a:hover {
-    color: #7386D5;
-    background: #fff;
-}
+        .wrapper {
+            display: flex;
+            width: 100%;
+            align-items: stretch;
+        }
 
-        #sidebar ul li.active > a,
-        a[aria-expanded="true"] {
+        #sidebar {
+            min-width: 80px;
+            max-width: 100px;
+            background: #87a96c;
             color: #fff;
-            background: #87a96c;
+            transition: all 0.3s;
         }
 
-a[data-toggle="collapse"] {
-    position: relative;
-}
+            #sidebar.active {
+                margin-left: -250px;
+            }
 
-.dropdown-toggle::after {
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-}
+            #sidebar .sidebar-header {
+                padding: 20px;
+                background: #87a96c;
+            }
 
-ul ul a {
-    font-size: 0.9em !important;
-    padding-left: 30px !important;
-    background: #6d7fcc;
-}
+            #sidebar ul.components {
+                padding: 20px 0;
+                border-bottom: 1px solid #87a96c;
+            }
 
-ul.CTAs {
-    padding: 20px;
-}
+            #sidebar ul p {
+                color: #fff;
+                padding: 10px;
+            }
 
-ul.CTAs a {
-    text-align: center;
-    font-size: 0.9em !important;
-    display: block;
-    border-radius: 5px;
-    margin-bottom: 5px;
-}
+            #sidebar ul li a {
+                padding: 10px;
+                font-size: 50px;
+                display: block;
+            }
 
-a.download {
-    background: #fff;
-    color: #7386D5;
-}
+                #sidebar ul li a:hover {
+                    color: #47702a;
+                    background: #c4f59c;
+                    border-radius: 0 5px 5px 0;
+                    margin-right: 10px;
+                }
 
-a.article,
-a.article:hover {
-    background: #6d7fcc !important;
-    color: #fff !important;
-}
+            #sidebar ul li.active > a,
+            a[aria-expanded="true"] {
+                color: white;
+                background: #47702a;
+                border-radius: 0 5px 5px 0;
+                margin-right: 10px;
+            }
 
-/* ---------------------------------------------------
-    CONTENT STYLE
------------------------------------------------------ */
+        a[data-toggle="collapse"] {
+            /*float:right;*/
+            /*position:relative;*/
+        }
 
-#content {
-    width: 100%;
-    padding: 20px;
-    min-height: 100vh;
-    transition: all 0.3s;
-}
+        .dropdown-toggle::after {
+           /* display: block;
+            position: absolute;*/
+           left:10px;
+            content:none;
+            /*top: 50%;*/
+            /*right: 20px;*/
+            /*transform: translateY(-50%);*/
+        }
 
-/* ---------------------------------------------------
-    MEDIAQUERIES
------------------------------------------------------ */
-
-@@media (max-width: 768px) {
-    #sidebar {
-        margin-left: -250px;
+    ul ul a {
+        font-size: 25px !important;
+        padding-left: 30px !important;
+        background: #a5cf84;
     }
-    #sidebar.active {
-        margin-left: 0;
-    }
-    #sidebarCollapse span {
-        display: none;
-    }
-}
+
+        ul.CTAs {
+            padding: 20px;
+        }
+
+            ul.CTAs a {
+                text-align: center;
+                font-size: 0.9em !important;
+                display: block;
+                border-radius: 5px;
+                margin-bottom: 5px;
+            }
+
+        a.download {
+            background: #fff;
+            color: #7386D5;
+        }
+
+        a.article,
+        a.article:hover {
+            background: #6d7fcc !important;
+            color: #fff !important;
+        }
+
+        /* ---------------------------------------------------
+        CONTENT STYLE
+    ----------------------------------------------------- */
+
+        #content {
+            width: 100%;
+            padding: 20px;
+            min-height: 100vh;
+            transition: all 0.3s;
+        }
+
+        /* ---------------------------------------------------
+        MEDIAQUERIES
+    ----------------------------------------------------- */
+
+        @@media (max-width: 768px) {
+            #sidebar {
+                margin-left: -250px;
+            }
+
+                #sidebar.active {
+                    margin-left: 0;
+                }
+
+            #sidebarCollapse span {
+                display: none;
+            }
+        }
+
+        .toggle-btn {
+            background-color: #87a96c !important;
+            color: white;
+        }
+
+            .toggle-btn:hover {
+                background-color: #47702a !important;
+                color: white;
+            }
 </style>
 <script>
     $(document).ready(function () {
@@ -307,3 +302,6 @@ a.article:hover {
         });
     });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
