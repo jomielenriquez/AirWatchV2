@@ -3,38 +3,16 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - AirWatch</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body id="body-pd">
     <div class="wrapper">
-
-
-        @* start *@
-
-        @* end *@
-        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark fixed-left">
-                <div class="container">
-                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav flex-grow-1">
-                            <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                            <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>*@
         <nav id="sidebar">
 
             <ul class="list-unstyled components">
-                @*<p>Main Menu</p>*@
                 <li class="active">
                     <a href="#"><i class="fa fa-home" aria-hidden="true"></i></a>
                 </li>
@@ -44,9 +22,6 @@
                 <li>
                     <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i></a>
                 </li>
-                @*<li>
-                    <a href="#"><i class="fa fa-cog" aria-hidden="true"></i></a>
-                </li>*@
                 <li>
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cog" aria-hidden="true"></i></a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
@@ -61,32 +36,37 @@
             </ul>
         </nav>
 
-        <div id="content" class="container body-content height-100 bg-light">
+        <div id="content" class="container body-content height-100 bg-light" style="margin-top:0 !important">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
                     <button type="button" id="sidebarCollapse" class="btn btn-info toggle-btn">
                         <i class="fa fa-bars" aria-hidden="true"></i>
                     </button>
+                    @*<a class="nav-link" href="#" style="padding-left:10px"><h3>AirWatch</h3></a>*@
+                    <a class="nav-link" style="padding-left: 10px"> Poblacion, Malvar, Batangas</a>
 
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
+                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#"><h3>AirWatch</h3></a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
                             </li>
-                            @*<li class="nav-item">
-                                    <a class="nav-link" href="#">Page</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Page</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Page</a>
-                                </li>*@
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="fa fa-download" aria-hidden="true"></i> Download Reports</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="fa fa-file-text" aria-hidden="true"></i> Log</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="fa fa-key" aria-hidden="true"></i> Change Password</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -94,7 +74,7 @@
             @RenderBody()
             <hr />
             <footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                <p>&copy; @DateTime.Now.Year - AirWatch</p>
             </footer>
         </div>
     </div>
@@ -105,10 +85,6 @@
 </body>
 </html>
 <style>
-        /*
-        DEMO STYLE
-    */
-
         @@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
         body {
@@ -174,6 +150,7 @@
 
             #sidebar.active {
                 margin-left: -250px;
+                margin-right: 150px;
             }
 
             #sidebar .sidebar-header {
@@ -212,19 +189,9 @@
                 margin-right: 10px;
             }
 
-        a[data-toggle="collapse"] {
-            /*float:right;*/
-            /*position:relative;*/
-        }
-
         .dropdown-toggle::after {
-           /* display: block;
-            position: absolute;*/
            left:10px;
             content:none;
-            /*top: 50%;*/
-            /*right: 20px;*/
-            /*transform: translateY(-50%);*/
         }
 
     ul ul a {
@@ -273,15 +240,23 @@
 
         @@media (max-width: 768px) {
             #sidebar {
-                margin-left: -250px;
+                margin-left: -220px;
+                margin-right: 150px;
             }
 
                 #sidebar.active {
                     margin-left: 0;
+                    margin-right: 10px;
                 }
 
             #sidebarCollapse span {
                 display: none;
+            }
+            .toggle-btn{
+                display:none;
+            }
+            .nav-item {
+                display: block !important;
             }
         }
 
@@ -294,6 +269,9 @@
                 background-color: #47702a !important;
                 color: white;
             }
+    .nav-item{
+        display:none;
+    }
 </style>
 <script>
     $(document).ready(function () {
