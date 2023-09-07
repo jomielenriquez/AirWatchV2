@@ -18,5 +18,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TBL_ACTIVATION">
+      <EntityTypeMapping TypeName="AirWatchDBModel.TBL_ACTIVATION">
+        <MappingFragment StoreEntitySet="TBL_ACTIVATION">
+          <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
+          <ScalarProperty Name="UPDATEDDATE" ColumnName="UPDATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+          <ScalarProperty Name="ACTIVATIONID" ColumnName="ACTIVATIONID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

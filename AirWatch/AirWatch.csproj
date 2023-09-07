@@ -151,7 +151,11 @@
     <Compile Include="Models\TBL_ACCOUNTS.cs">
       <DependentUpon>AirWatchModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TBL_ACTIVATION.cs">
+      <DependentUpon>AirWatchModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ActivationRepository.cs" />
     <Compile Include="Repository\Data.cs" />
     <Compile Include="Repository\LoginRepository.cs" />
   </ItemGroup>
@@ -226,6 +230,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\Login\SignIn.cshtml" />
+    <Content Include="Views\Login\ForgotPassword.cshtml" />
+    <Content Include="Views\Login\SendEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

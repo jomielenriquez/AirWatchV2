@@ -18,5 +18,18 @@
   </EntityType>
   <EntityContainer Name="AirWatchDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="TBL_ACCOUNTS" EntityType="Self.TBL_ACCOUNTS" />
+    <EntitySet Name="TBL_ACTIVATION" EntityType="AirWatchDBModel.TBL_ACTIVATION" />
   </EntityContainer>
+  <EntityType Name="TBL_ACTIVATION">
+    <Key>
+      <PropertyRef Name="ACTIVATIONID" />
+    </Key>
+    <Property Name="ACTIVATIONID" Type="Guid" Nullable="false" />
+    <Property Name="CODE" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CREATEDDATE" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CREATEDBY" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UPDATEDDATE" Type="DateTime" Precision="3" />
+    <Property Name="UPDATEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

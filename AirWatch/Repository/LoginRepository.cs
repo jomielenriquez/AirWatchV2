@@ -23,5 +23,12 @@ namespace AirWatch.Repository
 
             return (TBL_ACCOUNTS)account;
         }
+        public static TBL_ACCOUNTS GetAccountByEmail(string email)
+        {
+            AirWatchDBEntities entities = new AirWatchDBEntities();
+            var account = (from accounts in entities.TBL_ACCOUNTS.Where(acnt => acnt.EMAIL == email) select accounts).FirstOrDefault();
+
+            return (TBL_ACCOUNTS)account;
+        }
     }
 }
