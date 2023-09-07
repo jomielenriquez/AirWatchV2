@@ -1,0 +1,99 @@
+﻿@model AirWatch.Models.LoginModel
+@{
+    ViewBag.Title = "SendEmail";
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<div class="image-container">
+    <img src="~/Image/Malvar_Logo.png" class="logo" />
+</div>
+<div class="alert alert-success col-lg-4">
+    <form>
+        <fieldset>
+            <legend>Please wait while email is sending...</legend>
+        </fieldset>
+        <br />
+        <a href="@Url.Action("ForgotPassword", "Login")" class="btn btn-link">Taking too long. Resend again.</a>
+    </form>
+</div>
+<div class="alert alert-dismissible alert-danger col-lg-4" style="display: @(Model.ErrorMessage!=null ? "block":"none")">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <h4 class="alert-heading">Error!</h4>
+    <p class="mb-0">@Model.ErrorMessage</p>
+</div>
+
+<style>
+    .alert {
+        margin: 5px auto auto auto;
+    }
+
+    input {
+        max-width: none !important;
+    }
+
+    legend {
+        text-align: center !important;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+
+    .logo {
+        top: 0;
+        height: 100px;
+        width: 100px;
+    }
+
+    @@media (max-width: 1000px) {
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .alert {
+            margin: auto auto auto auto;
+        }
+
+        .alert-dismissible {
+            margin-top: 10px;
+        }
+    }
+
+    .displayNone {
+        display: none;
+    }
+
+    #inputCode::-webkit-outer-spin-button,
+    #inputCode::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    #inputCode[type="number"] {
+        -moz-appearance: textfield;
+    }
+</style>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.4.0/dist/email.min.js"></script>
+<script>
+    var code = '@(Model.retrievalData != null? Model.retrievalData.otp:null)';
+    (function () {
+        emailjs.init("so6CInXAZKBkwTR1j"); //please encrypted user id for malicious attacks
+    })();
+    
+    var templateParams = {
+        to_name: '@Model.retrievalData.email',
+        message: code
+    };
+
+    emailjs.send('service_zecp6hi', 'template_v113vu9', templateParams)
+    .then(function (response) {
+        window.location.href = '/Login/ForgotPassword';
+
+        console.log('SUCCESS!', response.status, response.text);
+    }, function (error) {
+        alert('FAILED... ' + error);
+        console.log('FAILED...', error);
+    });
+</script>

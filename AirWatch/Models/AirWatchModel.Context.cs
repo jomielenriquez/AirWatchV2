@@ -26,5 +26,6 @@ namespace AirWatch.Models
         }
     
         public DbSet<TBL_ACCOUNTS> TBL_ACCOUNTS { get; set; }
+        public DbSet<TBL_ACTIVATION> TBL_ACTIVATION { get; set; }
     }
 }

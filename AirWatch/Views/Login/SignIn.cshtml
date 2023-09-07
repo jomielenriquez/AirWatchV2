@@ -21,14 +21,14 @@
                 @Html.TextBoxFor(model => model.password, new { @id = "inputPassword", @class = "form-control", @placeholder = "Password", @type = "password" })
             </div>
         </fieldset>
-        <button type="button" class="btn btn-link">Forgot Password</button>
+        <a href="@Url.Action("ForgotPassword", "Login")" class="btn btn-link">Forgot Password</a>
         <br />
         <button type="submit" class="btn btn-primary">Login</button>
     }
 </div>
-<div class="alert alert-dismissible alert-danger col-lg-4" style="display: @(Model.ErrorMessage!=null ? "block":"none")">
+<div class="alert alert-dismissible alert-@(Model.MessageType == "success"? "success" : "danger") col-lg-4" style="display: @(Model.ErrorMessage!=null ? "block":"none")">
     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    <h4 class="alert-heading">Error!</h4>
+    <h4 class="alert-heading">@(Model.MessageType == "success" ? "Success!!" : "Error!!")</h4>
     <p class="mb-0">@Model.ErrorMessage</p>
 </div>
 

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AirWatchDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AirWatchDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="TBL_ACCOUNTS">
           <Key>
             <PropertyRef Name="ACCOUNTID" />
@@ -21,11 +21,23 @@
           <Property Name="UPDATEDDATE" Type="datetime" />
           <Property Name="UPDATEDBY" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="TBL_ACTIVATION">
+          <Key>
+            <PropertyRef Name="ACTIVATIONID" />
+          </Key>
+          <Property Name="ACTIVATIONID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CODE" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="EMAIL" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CREATEDDATE" Type="datetime" Nullable="false" />
+          <Property Name="CREATEDBY" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UPDATEDDATE" Type="datetime" />
+          <Property Name="UPDATEDBY" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityContainer Name="AirWatchDBModelStoreContainer">
           <EntitySet Name="TBL_ACCOUNTS" EntityType="Self.TBL_ACCOUNTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_ACTIVATION" EntityType="Self.TBL_ACTIVATION" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AirWatchDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -47,7 +59,20 @@
         </EntityType>
         <EntityContainer Name="AirWatchDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="TBL_ACCOUNTS" EntityType="Self.TBL_ACCOUNTS" />
+          <EntitySet Name="TBL_ACTIVATION" EntityType="AirWatchDBModel.TBL_ACTIVATION" />
         </EntityContainer>
+        <EntityType Name="TBL_ACTIVATION">
+          <Key>
+            <PropertyRef Name="ACTIVATIONID" />
+          </Key>
+          <Property Name="ACTIVATIONID" Type="Guid" Nullable="false" />
+          <Property Name="CODE" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CREATEDDATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CREATEDBY" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UPDATEDDATE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -68,6 +93,19 @@
                 <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
                 <ScalarProperty Name="UPDATEDDATE" ColumnName="UPDATEDDATE" />
                 <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_ACTIVATION">
+            <EntityTypeMapping TypeName="AirWatchDBModel.TBL_ACTIVATION">
+              <MappingFragment StoreEntitySet="TBL_ACTIVATION">
+                <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
+                <ScalarProperty Name="UPDATEDDATE" ColumnName="UPDATEDDATE" />
+                <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+                <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
+                <ScalarProperty Name="ACTIVATIONID" ColumnName="ACTIVATIONID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
