@@ -3,32 +3,190 @@
     ViewBag.Title = "Home Page";
 }
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
-
+<div class="bs-docs-section">
     <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+        <div class="col-lg-4">
+            <div class="card border-dark mb-4">
+                <div class="card-header">Humidity</div>
+                <div class="card-body">
+                    <canvas width="800" height="600" id="humidityChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card border-dark mb-4">
+                <div class="card-header">Ammonia</div>
+                <div class="card-body">
+                    <canvas id="ammoniaChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card border-dark mb-4">
+                <div class="card-header">Sulfur dioxide</div>
+                <div class="card-body">
+                    <canvas width="800" height="600" id="SulfurChart"></canvas>
+                </div>
+            </div>
+        </div>
     </div>
-</main>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card border-dark mb-4">
+                <div class="card-header">Temperature</div>
+                <div class="card-body">
+                    <canvas width="800" height="600" id="temperatureChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card border-dark mb-4">
+                <div class="card-header">Carbon Monoxide</div>
+                <div class="card-body">
+                    <canvas width="800" height="600" id="carbonChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card border-dark mb-4">
+                <div class="card-header">Nitrogen Oxide</div>
+                <div class="card-body">
+                    <canvas width="800" height="600" id="NitrogenChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    window.onload = function () {
+        
+        const humidityctx = document.getElementById('humidityChart');
+
+        new Chart(humidityctx, {
+            type: 'line',
+            data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: 'Humidity',
+                data: [12, 19, 3, 5, 2, 3],
+                borderWidth: 1
+            }]
+            },
+            options: {
+            scales: {
+                y: {
+                beginAtZero: true
+                }
+            }
+            }
+        });
+
+        const AmmoniaChart = document.getElementById('ammoniaChart');
+
+        new Chart(AmmoniaChart, {
+            type: 'line',
+            data: {
+                labels: ['qwe', 'asd', 'dfgd', 'cxvx', 'ewrw', 'dffg'],
+                datasets: [{
+                    label: 'Ammonia',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        const SulfurChart = document.getElementById('SulfurChart');
+
+        new Chart(SulfurChart, {
+            type: 'line',
+            data: {
+                labels: ['qwe', 'asd', 'dfgd', 'cxvx', 'ewrw', 'dffg'],
+                datasets: [{
+                    label: 'Sulfur Dioxide',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1,
+                }],
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        const TemperatureChart = document.getElementById('temperatureChart');
+
+        new Chart(TemperatureChart, {
+            type: 'line',
+            data: {
+                labels: ['qwe', 'asd', 'dfgd', 'cxvx', 'ewrw', 'dffg'],
+                datasets: [{
+                    label: 'Temperature',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1,
+                }],
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        const carbonChart = document.getElementById('carbonChart');
+
+        new Chart(carbonChart, {
+            type: 'line',
+            data: {
+                labels: ['qwe', 'asd', 'dfgd', 'cxvx', 'ewrw', 'dffg'],
+                datasets: [{
+                    label: 'Carbon Monoxide',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1,
+                }],
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        const NitrogenChart = document.getElementById('NitrogenChart');
+
+        new Chart(NitrogenChart, {
+            type: 'line',
+            data: {
+                labels: ['qwe', 'asd', 'dfgd', 'cxvx', 'ewrw', 'dffg'],
+                datasets: [{
+                    label: 'Nitrogen Oxide',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1,
+                }],
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    };
+
+</script>
