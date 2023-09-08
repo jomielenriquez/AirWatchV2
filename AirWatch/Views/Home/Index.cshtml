@@ -17,7 +17,7 @@
             <div class="card border-dark mb-4">
                 <div class="card-header">Ammonia</div>
                 <div class="card-body">
-                    @*<canvas id="ammoniaChart"></canvas>*@
+                    <div id="ammoniaChart" style="height: 370px; "></div>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
             <div class="card border-dark mb-4">
                 <div class="card-header">Sulfur dioxide</div>
                 <div class="card-body">
-                    @*<canvas width="800" height="600" id="SulfurChart"></canvas>*@
+                    <div id="sulfurChart" style="height: 370px; "></div>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
             <div class="card border-dark mb-4">
                 <div class="card-header">Temperature</div>
                 <div class="card-body">
-                    @*<canvas width="800" height="600" id="temperatureChart"></canvas>*@
+                    <div id="temperatureChart" style="height: 370px; "></div>
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
             <div class="card border-dark mb-4">
                 <div class="card-header">Carbon Monoxide</div>
                 <div class="card-body">
-                    @*<canvas width="800" height="600" id="carbonChart"></canvas>*@
+                    <div id="carbonChart" style="height: 370px; "></div>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
             <div class="card border-dark mb-4">
                 <div class="card-header">Nitrogen Oxide</div>
                 <div class="card-body">
-                    @*<canvas width="800" height="600" id="NitrogenChart"></canvas>*@
+                    <div id="NitrogenChart" style="height: 370px; "></div>
                 </div>
             </div>
         </div>
@@ -60,8 +60,14 @@
 <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 <script>
     window.onload = function () {
+        var updateInterval = 1;
 
-        var dataPoints1 = [];
+        var hummidityDataPoints1 = [];
+        var ammoniaDataPoints1 = [];
+        var sulfurDataPoints1 = [];
+        var temperatureDataPoints1 = [];
+        var carbonDataPoints1 = [];
+        var nitrogenDataPoints1 = [];
         //var dataPoints2 = [];
 
         var chart = new CanvasJS.Chart("humidityChart", {
@@ -70,7 +76,7 @@
                 //text: "Share Value of Two Companies"  // remove title
             },
             axisX: {
-                title: "chart updates every 3 secs"
+                title: "chart updates every " + updateInterval + " secs"
             },
             axisY: {
                 //prefix: "$"
@@ -94,7 +100,7 @@
                     xValueFormatString: "hh:mm:ss TT",
                     showInLegend: true,
                     name: "Humidity",
-                    dataPoints: dataPoints1,
+                    dataPoints: hummidityDataPoints1,
                     color: "green"
                 },
                 //{
@@ -108,6 +114,176 @@
             ]
         });
 
+        var ammoniaChart = new CanvasJS.Chart("ammoniaChart", {
+            zoomEnabled: true,
+            title: {
+            },
+            axisX: {
+                title: "chart updates every " + updateInterval + " secs"
+            },
+            axisY: {
+                title: " Ammonia"
+            },
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor: "pointer",
+                verticalAlign: "top",
+                fontSize: 22,
+                fontColor: "dimGrey",
+                itemclick: toggleDataSeries
+            },
+            data: [
+                {
+                    type: "line",
+                    xValueType: "dateTime",
+                    yValueFormatString: "####.00",
+                    xValueFormatString: "hh:mm:ss TT",
+                    showInLegend: true,
+                    name: "Ammonia",
+                    dataPoints: ammoniaDataPoints1,
+                    color: "green"
+                },
+            ]
+        });
+
+        var sulfurChart = new CanvasJS.Chart("sulfurChart", {
+            zoomEnabled: true,
+            title: {
+            },
+            axisX: {
+                title: "chart updates every " + updateInterval + " secs"
+            },
+            axisY: {
+                title: " SULFUR DIOXIDE"
+            },
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor: "pointer",
+                verticalAlign: "top",
+                fontSize: 22,
+                fontColor: "dimGrey",
+                itemclick: toggleDataSeries
+            },
+            data: [
+                {
+                    type: "line",
+                    xValueType: "dateTime",
+                    yValueFormatString: "####.00",
+                    xValueFormatString: "hh:mm:ss TT",
+                    showInLegend: true,
+                    name: "Sulfur Dioxide",
+                    dataPoints: sulfurDataPoints1,
+                    color: "green"
+                },
+            ]
+        });
+
+        var temperatureChart = new CanvasJS.Chart("temperatureChart", {
+            zoomEnabled: true,
+            title: {
+            },
+            axisX: {
+                title: "chart updates every " + updateInterval + " secs"
+            },
+            axisY: {
+                title: " Ammonia"
+            },
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor: "pointer",
+                verticalAlign: "top",
+                fontSize: 22,
+                fontColor: "dimGrey",
+                itemclick: toggleDataSeries
+            },
+            data: [
+                {
+                    type: "line",
+                    xValueType: "dateTime",
+                    yValueFormatString: "####.00",
+                    xValueFormatString: "hh:mm:ss TT",
+                    showInLegend: true,
+                    name: "Temperature",
+                    dataPoints: temperatureDataPoints1,
+                    color: "green"
+                },
+            ]
+        });
+
+        var carbonChart = new CanvasJS.Chart("carbonChart", {
+            zoomEnabled: true,
+            title: {
+            },
+            axisX: {
+                title: "chart updates every " + updateInterval + " secs"
+            },
+            axisY: {
+                title: " Ammonia"
+            },
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor: "pointer",
+                verticalAlign: "top",
+                fontSize: 22,
+                fontColor: "dimGrey",
+                itemclick: toggleDataSeries
+            },
+            data: [
+                {
+                    type: "line",
+                    xValueType: "dateTime",
+                    yValueFormatString: "####.00",
+                    xValueFormatString: "hh:mm:ss TT",
+                    showInLegend: true,
+                    name: "Carbon Monoxide",
+                    dataPoints: carbonDataPoints1,
+                    color: "green"
+                },
+            ]
+        });
+
+        var NitrogenChart = new CanvasJS.Chart("NitrogenChart", {
+            zoomEnabled: true,
+            title: {
+            },
+            axisX: {
+                title: "chart updates every " + updateInterval + " secs"
+            },
+            axisY: {
+                title: " Ammonia"
+            },
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor: "pointer",
+                verticalAlign: "top",
+                fontSize: 22,
+                fontColor: "dimGrey",
+                itemclick: toggleDataSeries
+            },
+            data: [
+                {
+                    type: "line",
+                    xValueType: "dateTime",
+                    yValueFormatString: "####.00",
+                    xValueFormatString: "hh:mm:ss TT",
+                    showInLegend: true,
+                    name: "Nitrogen Oxide",
+                    dataPoints: nitrogenDataPoints1,
+                    color: "green"
+                },
+            ]
+        });
+
         function toggleDataSeries(e) {
             if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
                 e.dataSeries.visible = false;
@@ -118,64 +294,143 @@
             chart.render();
         }
 
-        var updateInterval = 3000;
-        // initial value
-        var yValue1 = 600;
-        var yValue2 = 605;
+        //var updateInterval = 3000;
+        //// initial value
+        //var yValue1 = 600;
+        //var yValue2 = 605;
 
-        var time = new Date;
-        // starting at 9.30 am
-        time.setHours(9);
-        time.setMinutes(30);
-        time.setSeconds(00);
-        time.setMilliseconds(00);
+        //var time = new Date;
+        //// starting at 9.30 am
+        //time.setHours(9);
+        //time.setMinutes(30);
+        //time.setSeconds(00);
+        //time.setMilliseconds(00);
 
-        function updateChart(count) {
-            count = count || 1;
-            var deltaY1, deltaY2;
-            for (var i = 0; i < count; i++) {
-                time.setTime(time.getTime() + updateInterval);
-                deltaY1 = .5 + Math.random() * (-.5 - .5);
-                //deltaY2 = .5 + Math.random() * (-.5 - .5);
+        //function updateChart(count) {
+        //    count = count || 1;
+        //    var deltaY1, deltaY2;
+        //    for (var i = 0; i < count; i++) {
+        //        time.setTime(time.getTime() + updateInterval);
+        //        deltaY1 = .5 + Math.random() * (-.5 - .5);
+        //        //deltaY2 = .5 + Math.random() * (-.5 - .5);
 
-                // adding random value and rounding it to two digits. 
-                yValue1 = Math.round((yValue1 + deltaY1) * 100) / 100;
-                //yValue2 = Math.round((yValue2 + deltaY2) * 100) / 100;
+        //        // adding random value and rounding it to two digits. 
+        //        yValue1 = Math.round((yValue1 + deltaY1) * 100) / 100;
+        //        //yValue2 = Math.round((yValue2 + deltaY2) * 100) / 100;
 
-                // pushing the new values
-                dataPoints1.push({
-                    x: time.getTime(),
-                    y: yValue1
-                });
-                //dataPoints2.push({
-                //    x: time.getTime(),
-                //    y: yValue2
-                //});
-            }
+        //        // pushing the new values
+        //        dataPoints1.push({
+        //            x: time.getTime(),
+        //            y: yValue1
+        //        });
+        //        //dataPoints2.push({
+        //        //    x: time.getTime(),
+        //        //    y: yValue2
+        //        //});
+        //    }
 
-            // updating legend text with  updated with y Value 
-            chart.options.data[0].legendText = " Humidity " + yValue1;
-            //chart.options.data[1].legendText = " Company B  $" + yValue2;
-            chart.render();
-        }
+        //    // updating legend text with  updated with y Value 
+        //    chart.options.data[0].legendText = " Humidity " + yValue1;
+        //    //chart.options.data[1].legendText = " Company B  $" + yValue2;
+        //    chart.render();
+        //}
         // generates first set of dataPoints 
-        updateChart(100);
-        setInterval(function () { updateChart() }, updateInterval);
+        //updateChart(100);
+        //setInterval(function () { updateChart() }, updateInterval);
 
         function getdata() {
             $.ajax({
-                url: "/Home/GetTempData", // Replace with your API endpoint
-                type: "GET", // Use GET, POST, PUT, or DELETE depending on your API
+                url: "/Data/GetData", // API endpoint
+                type: "GET",
                 dataType: "json",
                 success: function (data) {
-                    // Update the page with the response data
-                    console.log("API Response: " + data);
+                    // Convert Date to UTC
+                    var ex = microsoftJsonDateToJsDate(data.CREATEDDATE);
+
+                    /////////////////////////////////////////
+                    //       UPDATE HUMIDITY               //
+                    /////////////////////////////////////////
+                    hummidityDataPoints1.push({
+                        x: ex,
+                        y: data.HUMIDITY
+                    });
+                    chart.options.data[0].legendText = " Humidity " + data.HUMIDITY;
+                    chart.render();
+
+                    /////////////////////////////////////////
+                    //       UPDATE AMMONIA                //
+                    /////////////////////////////////////////
+                    ammoniaDataPoints1.push({
+                        x: ex,
+                        y: data.AMMONIA
+                    });
+                    ammoniaChart.options.data[0].legendText = " Ammonia " + data.AMMONIA;
+                    ammoniaChart.render();
+
+                    /////////////////////////////////////////
+                    //       UPDATE SULFUR                 //
+                    /////////////////////////////////////////
+                    sulfurDataPoints1.push({
+                        x: ex,
+                        y: data.SULFURDIOXICE
+                    });
+                    sulfurChart.options.data[0].legendText = " Sulfur " + data.SULFURDIOXICE;
+                    sulfurChart.render();
+
+                    /////////////////////////////////////////
+                    //       UPDATE TEMPERATURE            //
+                    /////////////////////////////////////////
+                    temperatureDataPoints1.push({
+                        x: ex,
+                        y: data.TEMPERATURE
+                    });
+                    temperatureChart.options.data[0].legendText = " Temperature " + data.TEMPERATURE;
+                    temperatureChart.render();
+
+                    /////////////////////////////////////////
+                    //       UPDATE CARBON                 //
+                    /////////////////////////////////////////
+                    carbonDataPoints1.push({
+                        x: ex,
+                        y: data.CARBONMONOXIDE
+                    });
+                    carbonChart.options.data[0].legendText = " Carbon Monoxide " + data.CARBONMONOXIDE;
+                    carbonChart.render();
+
+                    /////////////////////////////////////////
+                    //       UPDATE NITROGEN               //
+                    /////////////////////////////////////////
+                    nitrogenDataPoints1.push({
+                        x: ex,
+                        y: data.NITROGENOXIDE
+                    });
+                    NitrogenChart.options.data[0].legendText = " Nitrogen Oxide " + data.NITROGENOXIDE;
+                    NitrogenChart.render();
+
                 },
                 error: function (error) {
                     console.error("Error:", error);
                 }
             });
         }
-        setInterval(function () { getdata() }, 1000);
+
+        function microsoftJsonDateToJsDate(msJsonDate) {
+            // Extract the numeric part (ticks) from the string
+            const match = /\/Date\((\d+)\)\//.exec(msJsonDate);
+            if (!match || match.length < 2) {
+                throw new Error('Invalid Microsoft JSON Date format.');
+            }
+
+            // Convert the ticks to milliseconds
+            const ticks = parseInt(match[1], 10);
+
+            // Create a JavaScript Date object using the milliseconds (interpreted as UTC)
+            const jsDateUtc = new Date(ticks);
+
+            return jsDateUtc;
+        }
+
+
+        setInterval(function () { getdata() }, updateInterval * 1000);
     }
 </script>

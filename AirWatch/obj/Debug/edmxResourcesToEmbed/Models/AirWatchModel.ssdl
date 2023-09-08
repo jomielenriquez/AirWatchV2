@@ -24,12 +24,31 @@
     <Property Name="CODE" Type="nvarchar" MaxLength="6" Nullable="false" />
     <Property Name="EMAIL" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="CREATEDDATE" Type="datetime" Nullable="false" />
-    <Property Name="CREATEDBY" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CREATEDBY" Type="nvarchar" MaxLength="50" />
+    <Property Name="UPDATEDDATE" Type="datetime" />
+    <Property Name="UPDATEDBY" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TBL_ENVIRONMENTDATA">
+    <Key>
+      <PropertyRef Name="ENVIRONMENTDATEID" />
+    </Key>
+    <Property Name="ENVIRONMENTDATEID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="EDID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HUMIDITY" Type="int" Nullable="false" />
+    <Property Name="AMMONIA" Type="int" Nullable="false" />
+    <Property Name="SULFURDIOXICE" Type="int" Nullable="false" />
+    <Property Name="TEMPERATURE" Type="int" Nullable="false" />
+    <Property Name="CARBONMONOXIDE" Type="int" Nullable="false" />
+    <Property Name="NITROGENOXIDE" Type="int" Nullable="false" />
+    <Property Name="ISDISPLAYED" Type="bit" Nullable="false" />
+    <Property Name="CREATEDDATE" Type="datetime" Nullable="false" />
+    <Property Name="CREATEDBY" Type="nvarchar" MaxLength="50" />
     <Property Name="UPDATEDDATE" Type="datetime" />
     <Property Name="UPDATEDBY" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityContainer Name="AirWatchDBModelStoreContainer">
     <EntitySet Name="TBL_ACCOUNTS" EntityType="Self.TBL_ACCOUNTS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBL_ACTIVATION" EntityType="Self.TBL_ACTIVATION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_ENVIRONMENTDATA" EntityType="Self.TBL_ENVIRONMENTDATA" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

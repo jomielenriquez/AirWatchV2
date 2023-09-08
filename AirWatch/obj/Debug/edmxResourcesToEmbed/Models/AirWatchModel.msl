@@ -31,5 +31,24 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TBL_ENVIRONMENTDATA">
+      <EntityTypeMapping TypeName="AirWatchDBModel.TBL_ENVIRONMENTDATA">
+        <MappingFragment StoreEntitySet="TBL_ENVIRONMENTDATA">
+          <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
+          <ScalarProperty Name="UPDATEDDATE" ColumnName="UPDATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="ISDISPLAYED" ColumnName="ISDISPLAYED" />
+          <ScalarProperty Name="NITROGENOXIDE" ColumnName="NITROGENOXIDE" />
+          <ScalarProperty Name="CARBONMONOXIDE" ColumnName="CARBONMONOXIDE" />
+          <ScalarProperty Name="TEMPERATURE" ColumnName="TEMPERATURE" />
+          <ScalarProperty Name="SULFURDIOXICE" ColumnName="SULFURDIOXICE" />
+          <ScalarProperty Name="AMMONIA" ColumnName="AMMONIA" />
+          <ScalarProperty Name="HUMIDITY" ColumnName="HUMIDITY" />
+          <ScalarProperty Name="EDID" ColumnName="EDID" />
+          <ScalarProperty Name="ENVIRONMENTDATEID" ColumnName="ENVIRONMENTDATEID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
