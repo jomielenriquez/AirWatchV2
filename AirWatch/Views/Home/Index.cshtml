@@ -2,14 +2,14 @@
 @{
     ViewBag.Title = "Home Page";
 }
-
+@*<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>*@
 <div class="bs-docs-section">
     <div class="row">
         <div class="col-lg-4">
             <div class="card border-dark mb-4">
                 <div class="card-header">Humidity</div>
                 <div class="card-body">
-                    <canvas width="800" height="600" id="humidityChart"></canvas>
+                    <div id="humidityChart" style="height: 370px; "></div>
                 </div>
             </div>
         </div>
@@ -17,7 +17,7 @@
             <div class="card border-dark mb-4">
                 <div class="card-header">Ammonia</div>
                 <div class="card-body">
-                    <canvas id="ammoniaChart"></canvas>
+                    @*<canvas id="ammoniaChart"></canvas>*@
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
             <div class="card border-dark mb-4">
                 <div class="card-header">Sulfur dioxide</div>
                 <div class="card-body">
-                    <canvas width="800" height="600" id="SulfurChart"></canvas>
+                    @*<canvas width="800" height="600" id="SulfurChart"></canvas>*@
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
             <div class="card border-dark mb-4">
                 <div class="card-header">Temperature</div>
                 <div class="card-body">
-                    <canvas width="800" height="600" id="temperatureChart"></canvas>
+                    @*<canvas width="800" height="600" id="temperatureChart"></canvas>*@
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
             <div class="card border-dark mb-4">
                 <div class="card-header">Carbon Monoxide</div>
                 <div class="card-body">
-                    <canvas width="800" height="600" id="carbonChart"></canvas>
+                    @*<canvas width="800" height="600" id="carbonChart"></canvas>*@
                 </div>
             </div>
         </div>
@@ -51,142 +51,131 @@
             <div class="card border-dark mb-4">
                 <div class="card-header">Nitrogen Oxide</div>
                 <div class="card-body">
-                    <canvas width="800" height="600" id="NitrogenChart"></canvas>
+                    @*<canvas width="800" height="600" id="NitrogenChart"></canvas>*@
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 <script>
     window.onload = function () {
-        
-        const humidityctx = document.getElementById('humidityChart');
 
-        new Chart(humidityctx, {
-            type: 'line',
-            data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: 'Humidity',
-                data: [12, 19, 3, 5, 2, 3],
-                borderWidth: 1
-            }]
+        var dataPoints1 = [];
+        //var dataPoints2 = [];
+
+        var chart = new CanvasJS.Chart("humidityChart", {
+            zoomEnabled: true,
+            title: {
+                //text: "Share Value of Two Companies"  // remove title
             },
-            options: {
-            scales: {
-                y: {
-                beginAtZero: true
-                }
-            }
-            }
+            axisX: {
+                title: "chart updates every 3 secs"
+            },
+            axisY: {
+                //prefix: "$"
+                title: " Humidity"
+            },
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor: "pointer",
+                verticalAlign: "top",
+                fontSize: 22,
+                fontColor: "dimGrey",
+                itemclick: toggleDataSeries
+            },
+            data: [
+                {
+                    type: "line",
+                    xValueType: "dateTime",
+                    yValueFormatString: "####.00",
+                    xValueFormatString: "hh:mm:ss TT",
+                    showInLegend: true,
+                    name: "Humidity",
+                    dataPoints: dataPoints1,
+                    color: "green"
+                },
+                //{
+                //    type: "line",
+                //    xValueType: "dateTime",
+                //    yValueFormatString: "$####.00",
+                //    showInLegend: true,
+                //    name: "Company B",
+                //    dataPoints: dataPoints2
+                //}
+            ]
         });
 
-        const AmmoniaChart = document.getElementById('ammoniaChart');
-
-        new Chart(AmmoniaChart, {
-            type: 'line',
-            data: {
-                labels: ['qwe', 'asd', 'dfgd', 'cxvx', 'ewrw', 'dffg'],
-                datasets: [{
-                    label: 'Ammonia',
-                    data: [12, 19, 3, 5, 2, 3],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
+        function toggleDataSeries(e) {
+            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
             }
-        });
-
-        const SulfurChart = document.getElementById('SulfurChart');
-
-        new Chart(SulfurChart, {
-            type: 'line',
-            data: {
-                labels: ['qwe', 'asd', 'dfgd', 'cxvx', 'ewrw', 'dffg'],
-                datasets: [{
-                    label: 'Sulfur Dioxide',
-                    data: [12, 19, 3, 5, 2, 3],
-                    borderWidth: 1,
-                }],
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
+            else {
+                e.dataSeries.visible = true;
             }
-        });
+            chart.render();
+        }
 
-        const TemperatureChart = document.getElementById('temperatureChart');
+        var updateInterval = 3000;
+        // initial value
+        var yValue1 = 600;
+        var yValue2 = 605;
 
-        new Chart(TemperatureChart, {
-            type: 'line',
-            data: {
-                labels: ['qwe', 'asd', 'dfgd', 'cxvx', 'ewrw', 'dffg'],
-                datasets: [{
-                    label: 'Temperature',
-                    data: [12, 19, 3, 5, 2, 3],
-                    borderWidth: 1,
-                }],
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
+        var time = new Date;
+        // starting at 9.30 am
+        time.setHours(9);
+        time.setMinutes(30);
+        time.setSeconds(00);
+        time.setMilliseconds(00);
+
+        function updateChart(count) {
+            count = count || 1;
+            var deltaY1, deltaY2;
+            for (var i = 0; i < count; i++) {
+                time.setTime(time.getTime() + updateInterval);
+                deltaY1 = .5 + Math.random() * (-.5 - .5);
+                //deltaY2 = .5 + Math.random() * (-.5 - .5);
+
+                // adding random value and rounding it to two digits. 
+                yValue1 = Math.round((yValue1 + deltaY1) * 100) / 100;
+                //yValue2 = Math.round((yValue2 + deltaY2) * 100) / 100;
+
+                // pushing the new values
+                dataPoints1.push({
+                    x: time.getTime(),
+                    y: yValue1
+                });
+                //dataPoints2.push({
+                //    x: time.getTime(),
+                //    y: yValue2
+                //});
             }
-        });
 
-        const carbonChart = document.getElementById('carbonChart');
+            // updating legend text with  updated with y Value 
+            chart.options.data[0].legendText = " Humidity " + yValue1;
+            //chart.options.data[1].legendText = " Company B  $" + yValue2;
+            chart.render();
+        }
+        // generates first set of dataPoints 
+        updateChart(100);
+        setInterval(function () { updateChart() }, updateInterval);
 
-        new Chart(carbonChart, {
-            type: 'line',
-            data: {
-                labels: ['qwe', 'asd', 'dfgd', 'cxvx', 'ewrw', 'dffg'],
-                datasets: [{
-                    label: 'Carbon Monoxide',
-                    data: [12, 19, 3, 5, 2, 3],
-                    borderWidth: 1,
-                }],
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+        function getdata() {
+            $.ajax({
+                url: "/Home/GetTempData", // Replace with your API endpoint
+                type: "GET", // Use GET, POST, PUT, or DELETE depending on your API
+                dataType: "json",
+                success: function (data) {
+                    // Update the page with the response data
+                    console.log("API Response: " + data);
+                },
+                error: function (error) {
+                    console.error("Error:", error);
                 }
-            }
-        });
-
-        const NitrogenChart = document.getElementById('NitrogenChart');
-
-        new Chart(NitrogenChart, {
-            type: 'line',
-            data: {
-                labels: ['qwe', 'asd', 'dfgd', 'cxvx', 'ewrw', 'dffg'],
-                datasets: [{
-                    label: 'Nitrogen Oxide',
-                    data: [12, 19, 3, 5, 2, 3],
-                    borderWidth: 1,
-                }],
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    };
-
+            });
+        }
+        setInterval(function () { getdata() }, 1000);
+    }
 </script>

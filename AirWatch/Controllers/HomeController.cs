@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+//using System.Web.Http;
 
 namespace AirWatch.Controllers
 {
@@ -35,5 +36,13 @@ namespace AirWatch.Controllers
 
             return View();
         }
+        //[HttpGet]
+        //[Route("/Home/GetTempData")]
+        //public IHttpActionResult GetTempData()
+        //{
+        //    // Implement your API logic here
+        //    var data = new { message = "Hello from the API!" };
+        //    return Ok(data);
+        //}
     }
 }
