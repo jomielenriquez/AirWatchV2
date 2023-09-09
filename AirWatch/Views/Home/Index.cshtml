@@ -314,7 +314,7 @@
         //        deltaY1 = .5 + Math.random() * (-.5 - .5);
         //        //deltaY2 = .5 + Math.random() * (-.5 - .5);
 
-        //        // adding random value and rounding it to two digits. 
+        //        // adding random value and rounding it to two digits.
         //        yValue1 = Math.round((yValue1 + deltaY1) * 100) / 100;
         //        //yValue2 = Math.round((yValue2 + deltaY2) * 100) / 100;
 
@@ -329,12 +329,12 @@
         //        //});
         //    }
 
-        //    // updating legend text with  updated with y Value 
+        //    // updating legend text with  updated with y Value
         //    chart.options.data[0].legendText = " Humidity " + yValue1;
         //    //chart.options.data[1].legendText = " Company B  $" + yValue2;
         //    chart.render();
         //}
-        // generates first set of dataPoints 
+        // generates first set of dataPoints
         //updateChart(100);
         //setInterval(function () { updateChart() }, updateInterval);
 
@@ -344,68 +344,7 @@
                 type: "GET",
                 dataType: "json",
                 success: function (data) {
-                    // Convert Date to UTC
-                    var ex = microsoftJsonDateToJsDate(data.CREATEDDATE);
-
-                    /////////////////////////////////////////
-                    //       UPDATE HUMIDITY               //
-                    /////////////////////////////////////////
-                    hummidityDataPoints1.push({
-                        x: ex,
-                        y: data.HUMIDITY
-                    });
-                    chart.options.data[0].legendText = " Humidity " + data.HUMIDITY;
-                    chart.render();
-
-                    /////////////////////////////////////////
-                    //       UPDATE AMMONIA                //
-                    /////////////////////////////////////////
-                    ammoniaDataPoints1.push({
-                        x: ex,
-                        y: data.AMMONIA
-                    });
-                    ammoniaChart.options.data[0].legendText = " Ammonia " + data.AMMONIA;
-                    ammoniaChart.render();
-
-                    /////////////////////////////////////////
-                    //       UPDATE SULFUR                 //
-                    /////////////////////////////////////////
-                    sulfurDataPoints1.push({
-                        x: ex,
-                        y: data.SULFURDIOXICE
-                    });
-                    sulfurChart.options.data[0].legendText = " Sulfur " + data.SULFURDIOXICE;
-                    sulfurChart.render();
-
-                    /////////////////////////////////////////
-                    //       UPDATE TEMPERATURE            //
-                    /////////////////////////////////////////
-                    temperatureDataPoints1.push({
-                        x: ex,
-                        y: data.TEMPERATURE
-                    });
-                    temperatureChart.options.data[0].legendText = " Temperature " + data.TEMPERATURE;
-                    temperatureChart.render();
-
-                    /////////////////////////////////////////
-                    //       UPDATE CARBON                 //
-                    /////////////////////////////////////////
-                    carbonDataPoints1.push({
-                        x: ex,
-                        y: data.CARBONMONOXIDE
-                    });
-                    carbonChart.options.data[0].legendText = " Carbon Monoxide " + data.CARBONMONOXIDE;
-                    carbonChart.render();
-
-                    /////////////////////////////////////////
-                    //       UPDATE NITROGEN               //
-                    /////////////////////////////////////////
-                    nitrogenDataPoints1.push({
-                        x: ex,
-                        y: data.NITROGENOXIDE
-                    });
-                    NitrogenChart.options.data[0].legendText = " Nitrogen Oxide " + data.NITROGENOXIDE;
-                    NitrogenChart.render();
+                    RenderChartData(data);
 
                 },
                 error: function (error) {
@@ -430,7 +369,95 @@
             return jsDateUtc;
         }
 
+        function RenderChartData(data) {
+            // Convert Date to UTC
+            var ex = microsoftJsonDateToJsDate(data.CREATEDDATE);
 
-        setInterval(function () { getdata() }, updateInterval * 1000);
+            /////////////////////////////////////////
+            //       UPDATE HUMIDITY               //
+            /////////////////////////////////////////
+            hummidityDataPoints1.push({
+                x: ex,
+                y: data.HUMIDITY
+            });
+            chart.options.data[0].legendText = " Humidity " + data.HUMIDITY;
+            chart.render();
+
+            /////////////////////////////////////////
+            //       UPDATE AMMONIA                //
+            /////////////////////////////////////////
+            ammoniaDataPoints1.push({
+                x: ex,
+                y: data.AMMONIA
+            });
+            ammoniaChart.options.data[0].legendText = " Ammonia " + data.AMMONIA;
+            ammoniaChart.render();
+
+            /////////////////////////////////////////
+            //       UPDATE SULFUR                 //
+            /////////////////////////////////////////
+            sulfurDataPoints1.push({
+                x: ex,
+                y: data.SULFURDIOXICE
+            });
+            sulfurChart.options.data[0].legendText = " Sulfur " + data.SULFURDIOXICE;
+            sulfurChart.render();
+
+            /////////////////////////////////////////
+            //       UPDATE TEMPERATURE            //
+            /////////////////////////////////////////
+            temperatureDataPoints1.push({
+                x: ex,
+                y: data.TEMPERATURE
+            });
+            temperatureChart.options.data[0].legendText = " Temperature " + data.TEMPERATURE;
+            temperatureChart.render();
+
+            /////////////////////////////////////////
+            //       UPDATE CARBON                 //
+            /////////////////////////////////////////
+            carbonDataPoints1.push({
+                x: ex,
+                y: data.CARBONMONOXIDE
+            });
+            carbonChart.options.data[0].legendText = " Carbon Monoxide " + data.CARBONMONOXIDE;
+            carbonChart.render();
+
+            /////////////////////////////////////////
+            //       UPDATE NITROGEN               //
+            /////////////////////////////////////////
+            nitrogenDataPoints1.push({
+                x: ex,
+                y: data.NITROGENOXIDE
+            });
+            NitrogenChart.options.data[0].legendText = " Nitrogen Oxide " + data.NITROGENOXIDE;
+            NitrogenChart.render();
+        }
+
+        $.ajax({
+            url: "/Data/GetOneHundred", // API endpoint
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                // Convert Date to UTC
+                console.log(data);
+                if (data.length == 0) {
+                    console.log("no data");
+                    setInterval(function () { getdata() }, updateInterval * 1000);
+                }
+                else {
+                    data.forEach(function (values) {
+                        RenderChartData(values);
+                    });
+                    setInterval(function () { getdata() }, updateInterval * 1000);
+
+                }
+
+            },
+            error: function (error) {
+                console.error("Error:", error);
+            }
+        });
+
     }
 </script>

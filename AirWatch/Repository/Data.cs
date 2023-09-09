@@ -20,7 +20,7 @@ namespace AirWatch.Repository
         public string Save<T>(T Class, List<string> filter, string PrimaryKey)
         {
             string tableName = Class.GetType().Name;
-            string[] except = { "createddate", "updateddate", "updatedby" };
+            string[] except = { "createddate", "updateddate", "updatedby", "edid" };
 
             except = except.Concat(filter.ToArray()).ToArray();
 

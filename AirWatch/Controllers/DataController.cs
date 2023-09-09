@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
+using System.Xml.Linq;
 using AirWatch.Models;
 using AirWatch.Repository;
 
@@ -41,11 +42,26 @@ namespace AirWatch.Controllers
 
             data.CREATEDDATE = taipeiTime;
 
+            //Data newdata = new Data();
+            //string result = newdata.Save(data, new List<string> { "ENVIRONMENTDATEID" }, "ENVIRONMENTDATEID");
+
             return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        [System.Web.Http.HttpGet]
+        public JsonResult GetOneHundred()
+        {
+            // will return count 0 if no data
+            List<TBL_ENVIRONMENTDATA> EnvData = EnvironmentDataRepository.GetTop100();
+
+            return Json(EnvData, JsonRequestBehavior.AllowGet);
         }
         [System.Web.Http.HttpPost]
         public JsonResult PostData([FromBody] ReadingData data)
         {
+            if(data == null)
+            {
+                return Json(new { message = "Invalid data.", isSucess = false });
+            }
             Guid? ValidAPIKey = ConfigurationRepository.GetValidAPIkey();
             try
             {
@@ -57,6 +73,28 @@ namespace AirWatch.Controllers
             catch (Exception ex)
             {
                 return Json(new { message = "Error invalid api key.", isSucess = false });
+            }
+
+            Data newdata = new Data();
+
+            TBL_ENVIRONMENTDATA edata = new TBL_ENVIRONMENTDATA() { 
+                HUMIDITY = data.humidity,
+                AMMONIA = data.ammonia,
+                SULFURDIOXICE = data.sulfurdioxide,
+                TEMPERATURE = data.temperature,
+                CARBONMONOXIDE = data.carbonmonoxide,
+                NITROGENOXIDE = data.nitrogenoxide
+            };
+
+            string result =  newdata.Save(edata, new List<string> { "ENVIRONMENTDATEID" }, "ENVIRONMENTDATEID");
+
+            try
+            {
+                Guid InsertedGuid = new Guid(result);
+            }
+            catch(Exception ex)
+            {
+                return Json(new { message = "result", isSucess = false });
             }
 
             return Json(new { message = "Success", isSucess = true });

@@ -172,6 +172,7 @@
     <Compile Include="Repository\ActivationRepository.cs" />
     <Compile Include="Repository\ConfigurationRepository.cs" />
     <Compile Include="Repository\Data.cs" />
+    <Compile Include="Repository\EnvironmentDataRepository.cs" />
     <Compile Include="Repository\LoginRepository.cs" />
   </ItemGroup>
   <ItemGroup>
