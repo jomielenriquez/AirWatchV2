@@ -50,5 +50,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TBL_CONFIGURATION">
+      <EntityTypeMapping TypeName="AirWatchDBModel.TBL_CONFIGURATION">
+        <MappingFragment StoreEntitySet="TBL_CONFIGURATION">
+          <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
+          <ScalarProperty Name="UPDATEDDATE" ColumnName="UPDATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CONFIGURATIONVALUEGUID" ColumnName="CONFIGURATIONVALUEGUID" />
+          <ScalarProperty Name="CONFIGURATIONVALUEBOOL" ColumnName="CONFIGURATIONVALUEBOOL" />
+          <ScalarProperty Name="CONFIGURATIONVALUEINT" ColumnName="CONFIGURATIONVALUEINT" />
+          <ScalarProperty Name="CONFIGURATINVALUESTRING" ColumnName="CONFIGURATINVALUESTRING" />
+          <ScalarProperty Name="CONFIGURATIONKEY" ColumnName="CONFIGURATIONKEY" />
+          <ScalarProperty Name="CONFIGURATIONID" ColumnName="CONFIGURATIONID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

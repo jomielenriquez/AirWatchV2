@@ -33,6 +33,21 @@
           <Property Name="UPDATEDDATE" Type="datetime" />
           <Property Name="UPDATEDBY" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="TBL_CONFIGURATION">
+          <Key>
+            <PropertyRef Name="CONFIGURATIONID" />
+          </Key>
+          <Property Name="CONFIGURATIONID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CONFIGURATIONKEY" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CONFIGURATINVALUESTRING" Type="nvarchar" MaxLength="50" />
+          <Property Name="CONFIGURATIONVALUEINT" Type="int" />
+          <Property Name="CONFIGURATIONVALUEBOOL" Type="bit" />
+          <Property Name="CONFIGURATIONVALUEGUID" Type="uniqueidentifier" />
+          <Property Name="CREATEDDATE" Type="datetime" Nullable="false" />
+          <Property Name="CREATEDBY" Type="nvarchar" MaxLength="50" />
+          <Property Name="UPDATEDDATE" Type="datetime" />
+          <Property Name="UPDATEDBY" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="TBL_ENVIRONMENTDATA">
           <Key>
             <PropertyRef Name="ENVIRONMENTDATEID" />
@@ -54,6 +69,7 @@
         <EntityContainer Name="AirWatchDBModelStoreContainer">
           <EntitySet Name="TBL_ACCOUNTS" EntityType="Self.TBL_ACCOUNTS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_ACTIVATION" EntityType="Self.TBL_ACTIVATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_CONFIGURATION" EntityType="Self.TBL_CONFIGURATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_ENVIRONMENTDATA" EntityType="Self.TBL_ENVIRONMENTDATA" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -80,6 +96,7 @@
           <EntitySet Name="TBL_ACCOUNTS" EntityType="Self.TBL_ACCOUNTS" />
           <EntitySet Name="TBL_ACTIVATION" EntityType="AirWatchDBModel.TBL_ACTIVATION" />
           <EntitySet Name="TBL_ENVIRONMENTDATA" EntityType="AirWatchDBModel.TBL_ENVIRONMENTDATA" />
+          <EntitySet Name="TBL_CONFIGURATION" EntityType="AirWatchDBModel.TBL_CONFIGURATION" />
         </EntityContainer>
         <EntityType Name="TBL_ACTIVATION">
           <Key>
@@ -106,6 +123,21 @@
           <Property Name="CARBONMONOXIDE" Type="Int32" Nullable="false" />
           <Property Name="NITROGENOXIDE" Type="Int32" Nullable="false" />
           <Property Name="ISDISPLAYED" Type="Boolean" Nullable="false" />
+          <Property Name="CREATEDDATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CREATEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UPDATEDDATE" Type="DateTime" Precision="3" />
+          <Property Name="UPDATEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TBL_CONFIGURATION">
+          <Key>
+            <PropertyRef Name="CONFIGURATIONID" />
+          </Key>
+          <Property Name="CONFIGURATIONID" Type="Guid" Nullable="false" />
+          <Property Name="CONFIGURATIONKEY" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CONFIGURATINVALUESTRING" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CONFIGURATIONVALUEINT" Type="Int32" />
+          <Property Name="CONFIGURATIONVALUEBOOL" Type="Boolean" />
+          <Property Name="CONFIGURATIONVALUEGUID" Type="Guid" />
           <Property Name="CREATEDDATE" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CREATEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UPDATEDDATE" Type="DateTime" Precision="3" />
@@ -163,6 +195,22 @@
                 <ScalarProperty Name="HUMIDITY" ColumnName="HUMIDITY" />
                 <ScalarProperty Name="EDID" ColumnName="EDID" />
                 <ScalarProperty Name="ENVIRONMENTDATEID" ColumnName="ENVIRONMENTDATEID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_CONFIGURATION">
+            <EntityTypeMapping TypeName="AirWatchDBModel.TBL_CONFIGURATION">
+              <MappingFragment StoreEntitySet="TBL_CONFIGURATION">
+                <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
+                <ScalarProperty Name="UPDATEDDATE" ColumnName="UPDATEDDATE" />
+                <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+                <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+                <ScalarProperty Name="CONFIGURATIONVALUEGUID" ColumnName="CONFIGURATIONVALUEGUID" />
+                <ScalarProperty Name="CONFIGURATIONVALUEBOOL" ColumnName="CONFIGURATIONVALUEBOOL" />
+                <ScalarProperty Name="CONFIGURATIONVALUEINT" ColumnName="CONFIGURATIONVALUEINT" />
+                <ScalarProperty Name="CONFIGURATINVALUESTRING" ColumnName="CONFIGURATINVALUESTRING" />
+                <ScalarProperty Name="CONFIGURATIONKEY" ColumnName="CONFIGURATIONKEY" />
+                <ScalarProperty Name="CONFIGURATIONID" ColumnName="CONFIGURATIONID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

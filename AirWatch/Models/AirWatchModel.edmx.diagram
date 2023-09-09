@@ -8,6 +8,7 @@
         <EntityTypeShape EntityType="AirWatchDBModel.TBL_ACCOUNTS" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AirWatchDBModel.TBL_ACTIVATION" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="AirWatchDBModel.TBL_ENVIRONMENTDATA" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="AirWatchDBModel.TBL_CONFIGURATION" Width="1.5" PointX="3.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

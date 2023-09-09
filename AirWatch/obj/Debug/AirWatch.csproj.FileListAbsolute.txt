@@ -79,3 +79,7 @@ C:\Users\Jomiel\source\repos\AirWatch\AirWatch\obj\Debug\AirWatch.dll
 C:\Users\Jomiel\source\repos\AirWatch\AirWatch\obj\Debug\AirWatch.pdb
 C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\EntityFramework.dll
 C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\EntityFramework.xml
+C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\System.Net.Http.Formatting.dll
+C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\System.Web.Http.dll
+C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\System.Net.Http.Formatting.xml
+C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\System.Web.Http.xml
