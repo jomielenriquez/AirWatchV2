@@ -59,6 +59,7 @@
 </div>
 <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 <script>
+    var currentEDID = 0;
     window.onload = function () {
         var updateInterval = 1;
 
@@ -344,8 +345,12 @@
                 type: "GET",
                 dataType: "json",
                 success: function (data) {
-                    RenderChartData(data);
-
+                    var prevEDID = currentEDID;
+                    currentEDID = data.EDID;
+                    console.log(currentEDID);
+                    if (currentEDID > prevEDID) {
+                        RenderChartData(data);
+                    }
                 },
                 error: function (error) {
                     console.error("Error:", error);

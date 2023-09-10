@@ -20,5 +20,13 @@ namespace AirWatch.Repository
 
             return top100Data;
         }
+        public static TBL_ENVIRONMENTDATA GetLatest()
+        {
+            AirWatchDBEntities airWatchDBEntities = new AirWatchDBEntities();
+            TBL_ENVIRONMENTDATA latestData = airWatchDBEntities.TBL_ENVIRONMENTDATA
+                .OrderByDescending(env => env.EDID).FirstOrDefault();
+
+            return latestData;
+        }
     }
 }

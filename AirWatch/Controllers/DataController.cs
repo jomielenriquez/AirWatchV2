@@ -23,24 +23,26 @@ namespace AirWatch.Controllers
         {
             TBL_ENVIRONMENTDATA data = new TBL_ENVIRONMENTDATA();
 
-            Random rand = new Random();
+            //Random rand = new Random();
 
-            data.HUMIDITY = rand.Next(0 , 70);
-            data.AMMONIA = rand.Next(0, 9);
-            data.SULFURDIOXICE = rand.Next(440, 530);
-            data.TEMPERATURE = rand.Next(17, 40);
-            data.CARBONMONOXIDE = rand.Next(0, 2000);
-            data.NITROGENOXIDE = rand.Next(0, 90);
-            // Specify the desired time zone (Taipei Standard Time)
-            TimeZoneInfo taipeiTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Taipei Standard Time");
+            //data.HUMIDITY = rand.Next(0 , 70);
+            //data.AMMONIA = rand.Next(0, 9);
+            //data.SULFURDIOXICE = rand.Next(440, 530);
+            //data.TEMPERATURE = rand.Next(17, 40);
+            //data.CARBONMONOXIDE = rand.Next(0, 2000);
+            //data.NITROGENOXIDE = rand.Next(0, 90);
+            //// Specify the desired time zone (Taipei Standard Time)
+            //TimeZoneInfo taipeiTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Taipei Standard Time");
 
-            // Get the current UTC time
-            DateTime currentUtcTime = DateTime.UtcNow;
+            //// Get the current UTC time
+            //DateTime currentUtcTime = DateTime.UtcNow;
 
-            // Convert the UTC time to Taipei time
-            DateTime taipeiTime = TimeZoneInfo.ConvertTimeFromUtc(currentUtcTime, taipeiTimeZone);
+            //// Convert the UTC time to Taipei time
+            //DateTime taipeiTime = TimeZoneInfo.ConvertTimeFromUtc(currentUtcTime, taipeiTimeZone);
 
-            data.CREATEDDATE = taipeiTime;
+            //data.CREATEDDATE = taipeiTime;
+
+            data = EnvironmentDataRepository.GetLatest();
 
             //Data newdata = new Data();
             //string result = newdata.Save(data, new List<string> { "ENVIRONMENTDATEID" }, "ENVIRONMENTDATEID");
