@@ -12,6 +12,6 @@ jobs:
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
-        server: ftp://198.37.116.30
+        server: ftp://AirWatch.somee.com/www.AirWatch.somee.com
         username: AirWatch
         password: Watchtheair123123
