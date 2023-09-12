@@ -23,6 +23,44 @@ namespace AirWatch.Controllers
             return View(appModel);
         }
 
+        public ActionResult DowloadReports(AppModel model)
+        {
+            // This code will return user to the login page if there is no session
+            if (model == null)
+            {
+                model = new AppModel();
+            }
+            AppModel appModel = model;
+            if (appModel.Account == null)
+            {
+                return RedirectToAction("../Login/SignIn");
+            }
+
+            List<TBL_ENVIRONMENTDATA> envData = EnvironmentDataRepository.GetDataByDate(DateTime.Parse(model.DateFilter));
+            appModel.DateFilter = DateTime.Now.ToString("yyyy-MM-dd");
+            appModel.Data = envData;
+            return View(appModel);
+        }
+
+        public ActionResult Logs(AppModel model)
+        {
+            // This code will return user to the login page if there is no session
+            if(model == null)
+            {
+                model = new AppModel();
+            }
+            AppModel appModel = model;
+            if (appModel.Account == null)
+            {
+                return RedirectToAction("../Login/SignIn");
+            }
+
+            List<TBL_ENVIRONMENTDATA> envData = EnvironmentDataRepository.GetDataByDate(DateTime.Parse(model.DateFilter));
+            appModel.DateFilter = DateTime.Now.ToString("yyyy-MM-dd");
+            appModel.Data = envData;
+            return View(appModel);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -36,13 +74,5 @@ namespace AirWatch.Controllers
 
             return View();
         }
-        //[HttpGet]
-        //[Route("/Home/GetTempData")]
-        //public IHttpActionResult GetTempData()
-        //{
-        //    // Implement your API logic here
-        //    var data = new { message = "Hello from the API!" };
-        //    return Ok(data);
-        //}
     }
 }

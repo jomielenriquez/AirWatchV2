@@ -1,0 +1,86 @@
+﻿@model AirWatch.Models.AppModel
+
+@{
+    ViewBag.Title = "Logs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" />
+
+<h2>Logs</h2>
+
+<div class="alert alert-dismissible alert-light">
+    @using (Html.BeginForm("Logs", "Home", FormMethod.Post, new { id = "FilerForm" }))
+    {
+        <fieldset>
+            @*<legend>Logs</legend>*@
+            <div class="form-group">
+                <label for="inputFilterDate" class="form-label mt-4">Filter Date</label>
+                @Html.TextBoxFor(model => model.DateFilter, new { @id = "inputFilterDate", @class = "form-control", @placeholder = "Date", @type = "Date", onchange = "submitForm()", style="width: 300px" })
+            </div>
+        </fieldset>
+    }
+    <script>
+        function submitForm() {
+            document.getElementById("FilerForm").submit();
+        }
+    </script>
+</div>
+
+<div style="overflow-y:auto">
+    <table id="example" class="display nowrap" style="width:100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Humidity</th>
+                <th>Ammonia</th>
+                <th>Sulfur Dioxide</th>
+                <th>Tempreature</th>
+                <th>Carbon Monoxide</th>
+                <th>Nitrogen Oxide</th>
+                <th>Created Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(AirWatch.Models.TBL_ENVIRONMENTDATA data in Model.Data)
+            {
+                <tr>
+                    <td>@data.EDID</td>
+                    <td>@data.HUMIDITY</td>
+                    <td>@data.AMMONIA</td>
+                    <td>@data.SULFURDIOXICE</td>
+                    <td>@data.TEMPERATURE</td>
+                    <td>@data.CARBONMONOXIDE</td>
+                    <td>@data.NITROGENOXIDE</td>
+                    <td>@data.CREATEDDATE</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>ID</th>
+                <th>Humidity</th>
+                <th>Ammonia</th>
+                <th>Sulfur Dioxide</th>
+                <th>Tempreature</th>
+                <th>Carbon Monoxide</th>
+                <th>Nitrogen Oxide</th>
+                <th>Created Date</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                //'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
+</script>

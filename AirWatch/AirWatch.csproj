@@ -248,6 +248,8 @@
     <Content Include="Views\Login\SignIn.cshtml" />
     <Content Include="Views\Login\ForgotPassword.cshtml" />
     <Content Include="Views\Login\SendEmail.cshtml" />
+    <Content Include="Views\Home\DowloadReports.cshtml" />
+    <Content Include="Views\Home\Logs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

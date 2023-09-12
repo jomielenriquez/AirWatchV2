@@ -50,6 +50,18 @@ namespace AirWatch.Models
                 return null;
             }
         }
+        public List<TBL_ENVIRONMENTDATA> Data { get; set; }
+        public string DateFilter {
+            get
+            {
+                return datefilter;
+            }
+            set 
+            { 
+                datefilter = value;
+            }
+        }
+        private string datefilter = DateTime.Now.ToString("yyyy-MM-dd");
     }
     public class ChangePass
     {
