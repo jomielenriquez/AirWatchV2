@@ -29,7 +29,9 @@
         }
     </script>
 </div>
-
+@{ 
+    TimeZoneInfo taipeiTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Taipei Standard Time");
+}
 <div style="overflow-y:auto">
     <table id="example" class="display nowrap" style="width:100%">
         <thead>
@@ -45,7 +47,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(AirWatch.Models.TBL_ENVIRONMENTDATA data in Model.Data)
+            @foreach (AirWatch.Models.TBL_ENVIRONMENTDATA data in Model.Data)
             {
                 <tr>
                     <td>@data.EDID</td>
@@ -55,7 +57,7 @@
                     <td>@data.TEMPERATURE</td>
                     <td>@data.CARBONMONOXIDE</td>
                     <td>@data.NITROGENOXIDE</td>
-                    <td>@data.CREATEDDATE</td>
+                    <td>@(TimeZoneInfo.ConvertTime(data.CREATEDDATE, taipeiTimeZone))</td>
                 </tr>
             }
         </tbody>

@@ -29,7 +29,9 @@
         }
     </script>
 </div>
-
+@{
+    TimeZoneInfo taipeiTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Taipei Standard Time");
+}
 <div style="overflow-y:auto;">
     <table id="example" class="display nowrap" style="width:100%">
         <thead>
@@ -55,7 +57,7 @@
                     <td>@data.TEMPERATURE</td>
                     <td>@data.CARBONMONOXIDE</td>
                     <td>@data.NITROGENOXIDE</td>
-                    <td>@data.CREATEDDATE</td>
+                    <td>@(TimeZoneInfo.ConvertTime(data.CREATEDDATE, taipeiTimeZone))</td>
                 </tr>
             }
         </tbody>
