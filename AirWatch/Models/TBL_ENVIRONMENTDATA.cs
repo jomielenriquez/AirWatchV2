@@ -27,5 +27,8 @@ namespace AirWatch.Models
         public string CREATEDBY { get; set; }
         public Nullable<System.DateTime> UPDATEDDATE { get; set; }
         public string UPDATEDBY { get; set; }
+        public Nullable<decimal> SO2CONCENTRATION { get; set; }
+        public Nullable<decimal> COCONCENTRATION { get; set; }
+        public Nullable<decimal> NOXCONCENTRATION { get; set; }
     }
 }

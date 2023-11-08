@@ -3,8 +3,165 @@
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@*<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>*@
+<style>
+    .gauge-wrapper {
+        display: table;
+        margin: 0 auto;
+        background: #77cc9b;
+        padding: 35px 40px 40px;
+        border-radius: 6px;
+        box-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.32), 0 1px 9px -1px #15222e;
+    }
+
+    .heart {
+        margin: 0 8px;
+        display: inline-block;
+        animation: simplePulse ease-in-out 1.1s infinite;
+    }
+
+    .gauge {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #e7e7e7;
+        box-shadow: 0 0 0 6px rgba(255, 255, 255, .09), 0 0 35px 5px rgba(255, 255, 255, .29);
+        width: 200px;
+        height: 100px;
+        border-radius: 100px 100px 0 0;
+        position: relative;
+        overflow: hidden;
+        -webkit-transform-style: flat;
+        -webkit-transform: translateZ(0px);
+    }
+
+        .gauge.min-scaled {
+            transform: scale(.5);
+        }
+
+    .gauge-center {
+        content: '';
+        color: #fff;
+        width: 60%;
+        height: 60%;
+        background: #15222E;
+        border-radius: 100px 100px 0 0;
+        position: absolute;
+        box-shadow: 0 -13px 15px -10px rgba(0, 0, 0, .28);
+        right: 21%;
+        bottom: 0;
+        color: #fff;
+    }
+
+        .gauge-center::before {
+            content: attr(data-value);
+            font-size: 20px;
+            width: 100%;
+            padding: 10px 0 0 0;
+            text-align: center;
+            float: left;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .gauge-center::after {
+            content: 'ppm';
+            font-size: 12px;
+            width: 100%;
+            float: left;
+            opacity: .6;
+            text-align: center;
+        }
+
+    .needle {
+        width: 78px;
+        height: 7px;
+        background: #15222E;
+        border-bottom-left-radius: 100%;
+        border-bottom-right-radius: 5px;
+        border-top-left-radius: 100%;
+        border-top-right-radius: 5px;
+        position: absolute;
+        bottom: 4px;
+        left: 20px;
+        transform-origin: 100% 4px;
+        animation: speed 5s infinite;
+        box-shadow: 0 2px 2px 1px rgba(0, 0, 0, .38);
+        transition: transform 0.5s ease;
+    }
+
+    .gauge-slice-colors .gauge-st {
+        position: absolute;
+        bottom: 0;
+        width: 75px;
+        height: 0;
+        border-bottom: 80px solid #000;
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+    }
+
+        .gauge-slice-colors .gauge-st.gauge-slice-item:nth-child(1) {
+            border-bottom-color: #1eaa59;
+            left: -2px;
+        }
+
+        .gauge-slice-colors .gauge-st.gauge-slice-item:nth-child(2) {
+            border-bottom-color: #9baa1e;
+            transform: rotate(135deg);
+            transform-origin: right;
+            top: 12px;
+            left: -65px;
+        }
+
+        .gauge-slice-colors .gauge-st.gauge-slice-item:nth-child(3) {
+            border-bottom-color: #f1c40f;
+            transform: rotate(179deg);
+            transform-origin: right;
+            top: -3px;
+            left: -41px;
+            border-bottom-width: 90px;
+            border-left-width: 45px;
+            border-right-width: 45px;
+            width: 18px;
+        }
+
+        .gauge-slice-colors .gauge-st.gauge-slice-item:nth-child(4) {
+            border-bottom-color: #e67e22;
+            transform: rotate(219deg);
+            transform-origin: right;
+            top: -23px;
+            left: 43px;
+        }
+
+        .gauge-slice-colors .gauge-st.gauge-slice-item:nth-child(5) {
+            border-bottom-color: #E84C3D;
+            transform: rotate(240deg);
+            transform-origin: right;
+            right: 52px;
+        }
+    .gauge-category, .gauge-title {
+        text-align: center;
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        
+    });
+</script>
 <div class="bs-docs-section">
+    <div class="gauge-wrapper">
+        <div class="gauge-title"><b>Air Quality Index</b></div>
+        <div class="gauge">
+            <div class="gauge-slice-colors">
+                <div class="gauge-st gauge-slice-item"></div>
+                <div class="gauge-st gauge-slice-item"></div>
+                <div class="gauge-st gauge-slice-item"></div>
+                <div class="gauge-st gauge-slice-item"></div>
+                <div class="gauge-st gauge-slice-item"></div>
+            </div>
+            <div class="needle"></div>
+            <div class="gauge-center"></div>
+        </div>
+        <div class="gauge-category" id="gauge-result">Result</div>
+    </div>
+    <br />
+
     <div class="row">
         <div class="col-lg-4">
             <div class="card border-dark mb-4">
@@ -61,8 +218,32 @@
 <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 <script>
     var currentEDID = 0;
+    var needle123 = document.querySelector('.needle');
     window.onload = function () {
-        var updateInterval = 1;
+        needle123.style.transform = 'rotate(0deg)'; // set needle value
+
+        const gaugeCenter = document.querySelector('.gauge-center');
+        gaugeCenter.setAttribute('data-value', 0);
+
+        const needle = document.querySelector('.needle');
+
+        setInterval(() => {
+            const style = window.getComputedStyle(needle, null);
+            const transform = style.getPropertyValue('transform');
+            // Extract the current degree from the transform property
+            const values = transform.split('(')[1].split(')')[0].split(',');
+            let a = values[0];
+            let b = values[1];
+            let c = values[2];
+            let d = values[3];
+            let radians = Math.atan2(b, a);
+            let angle = Math.round((radians * (180 / Math.PI)));
+
+            // const gaugeCenter = document.querySelector('.gauge-center');
+            gaugeCenter.setAttribute('data-value', angle);
+        }, 10)
+
+        var updateInterval = 5;
 
         var hummidityDataPoints1 = [];
         var ammoniaDataPoints1 = [];
@@ -348,7 +529,6 @@
                 success: function (data) {
                     var prevEDID = currentEDID;
                     currentEDID = data.EDID;
-                    console.log(currentEDID);
                     if (currentEDID > prevEDID) {
                         RenderChartData(data);
                     }
@@ -438,6 +618,36 @@
             });
             NitrogenChart.options.data[0].legendText = " Nitrogen Oxide " + data.NITROGENOXIDE;
             NitrogenChart.render();
+
+            /////////////////////////////////////////
+            //          UPDATE GAUGE               //
+            /////////////////////////////////////////
+
+            var AQI = 0;
+            AQI = AQI > data.COCONCENTRATION ? AQI : data.COCONCENTRATION;
+            AQI = AQI > data.NOXCONCENTRATION ? AQI : data.NOXCONCENTRATION;
+            AQI = AQI > data.SO2CONCENTRATION ? AQI : data.SO2CONCENTRATION;
+            AQI = AQI == null ? 0 : AQI;
+
+            var eqDeg = (AQI / 500) * 180;
+
+            needle123.style.transform = 'rotate(' + eqDeg + 'deg)';
+
+            var gaugeResult = "";
+            gaugeResult = gaugeResult >= 0 && gaugeResult <= 50
+                ? "Good"
+                : gaugeResult >= 51 && gaugeResult <= 100
+                    ? "Satisfactory"
+                    : gaugeResult >= 101 && gaugeResult <= 200
+                        ? "Moderately Polluted"
+                        : gaugeResult >= 201 && gaugeResult <= 300
+                            ? "Poor"
+                            : gaugeResult >= 301 && gaugeResult <= 400
+                                ? "Very Poor"
+                                : gaugeResult >= 401 && gaugeResult <= 500
+                                    ? "Severe"
+                                : "Error"
+            document.getElementById("gauge-result").innerHTML = gaugeResult;
         }
 
         $.ajax({
@@ -445,8 +655,6 @@
             type: "GET",
             dataType: "json",
             success: function (data) {
-                // Convert Date to UTC
-                console.log(data);
                 if (data.length == 0) {
                     console.log("no data");
                     setInterval(function () { getdata() }, updateInterval * 1000);
