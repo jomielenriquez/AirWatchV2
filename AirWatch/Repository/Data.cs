@@ -31,7 +31,7 @@ namespace AirWatch.Repository
                     x => !except.Contains(x.Name.ToLower()) &&
                     getValue(x.Name, Class) != null &&
                     getValue(x.Name, Class).ToString() != "00000000-0000-0000-0000-000000000000" &&
-                    (x.PropertyType == typeof(System.Guid) || x.PropertyType == typeof(System.String) || x.PropertyType == typeof(System.Int16) || x.PropertyType == typeof(System.Int32) || x.PropertyType == typeof(System.Int64) || x.PropertyType == typeof(System.DateTime) || x.PropertyType == typeof(System.Boolean) || x.PropertyType == typeof(Nullable<Guid>) || x.PropertyType == typeof(Nullable<Int16>) || x.PropertyType == typeof(Nullable<Int32>) || x.PropertyType == typeof(Nullable<Int64>) || x.PropertyType == typeof(Nullable<Boolean>) || x.PropertyType == typeof(Nullable<System.DateTime>))
+                    (x.PropertyType == typeof(System.Guid) || x.PropertyType == typeof(System.String) || x.PropertyType == typeof(System.Int16) || x.PropertyType == typeof(System.Int32) || x.PropertyType == typeof(System.Int64) || x.PropertyType == typeof(System.DateTime) || x.PropertyType == typeof(System.Boolean) || x.PropertyType == typeof(Nullable<Guid>) || x.PropertyType == typeof(Nullable<Int16>) || x.PropertyType == typeof(Nullable<Int32>) || x.PropertyType == typeof(Nullable<Int64>) || x.PropertyType == typeof(Nullable<Boolean>) || x.PropertyType == typeof(Nullable<System.DateTime>) || x.PropertyType == typeof(Nullable<System.Decimal>) || x.PropertyType == typeof(System.Decimal))
                     )
                 .Select(x => x.Name);
 

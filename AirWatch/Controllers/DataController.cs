@@ -85,7 +85,10 @@ namespace AirWatch.Controllers
                 SULFURDIOXICE = data.sulfurdioxide,
                 TEMPERATURE = data.temperature,
                 CARBONMONOXIDE = data.carbonmonoxide,
-                NITROGENOXIDE = data.nitrogenoxide
+                NITROGENOXIDE = data.nitrogenoxide,
+                SO2CONCENTRATION = Decimal.Parse("0.2") * decimal.Parse(data.sulfurdioxide.ToString()),
+                COCONCENTRATION = Decimal.Parse("10") * decimal.Parse(data.carbonmonoxide.ToString()),
+                NOXCONCENTRATION = Decimal.Parse("0.5") * decimal.Parse(data.nitrogenoxide.ToString())
             };
 
             string result =  newdata.Save(edata, new List<string> { "ENVIRONMENTDATEID" }, "ENVIRONMENTDATEID");

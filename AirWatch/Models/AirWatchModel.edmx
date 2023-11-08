@@ -60,6 +60,9 @@
           <Property Name="TEMPERATURE" Type="int" Nullable="false" />
           <Property Name="CARBONMONOXIDE" Type="int" Nullable="false" />
           <Property Name="NITROGENOXIDE" Type="int" Nullable="false" />
+          <Property Name="SO2CONCENTRATION" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="COCONCENTRATION" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NOXCONCENTRATION" Type="decimal" Precision="18" Scale="2" />
           <Property Name="ISDISPLAYED" Type="bit" Nullable="false" />
           <Property Name="CREATEDDATE" Type="datetime" Nullable="false" />
           <Property Name="CREATEDBY" Type="nvarchar" MaxLength="50" />
@@ -127,6 +130,9 @@
           <Property Name="CREATEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UPDATEDDATE" Type="DateTime" Precision="3" />
           <Property Name="UPDATEDBY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SO2CONCENTRATION" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="COCONCENTRATION" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NOXCONCENTRATION" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="TBL_CONFIGURATION">
           <Key>
@@ -182,6 +188,9 @@
           <EntitySetMapping Name="TBL_ENVIRONMENTDATA">
             <EntityTypeMapping TypeName="AirWatchDBModel.TBL_ENVIRONMENTDATA">
               <MappingFragment StoreEntitySet="TBL_ENVIRONMENTDATA">
+                <ScalarProperty Name="NOXCONCENTRATION" ColumnName="NOXCONCENTRATION" />
+                <ScalarProperty Name="COCONCENTRATION" ColumnName="COCONCENTRATION" />
+                <ScalarProperty Name="SO2CONCENTRATION" ColumnName="SO2CONCENTRATION" />
                 <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
                 <ScalarProperty Name="UPDATEDDATE" ColumnName="UPDATEDDATE" />
                 <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
