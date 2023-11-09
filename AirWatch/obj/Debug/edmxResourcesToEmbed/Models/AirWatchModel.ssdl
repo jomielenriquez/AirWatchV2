@@ -58,6 +58,8 @@
     <Property Name="SO2CONCENTRATION" Type="decimal" Precision="18" Scale="2" />
     <Property Name="COCONCENTRATION" Type="decimal" Precision="18" Scale="2" />
     <Property Name="NOXCONCENTRATION" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AQI" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AQICATEGORY" Type="nchar" MaxLength="50" />
     <Property Name="ISDISPLAYED" Type="bit" Nullable="false" />
     <Property Name="CREATEDDATE" Type="datetime" Nullable="false" />
     <Property Name="CREATEDBY" Type="nvarchar" MaxLength="50" />

@@ -63,6 +63,8 @@
           <Property Name="SO2CONCENTRATION" Type="decimal" Precision="18" Scale="2" />
           <Property Name="COCONCENTRATION" Type="decimal" Precision="18" Scale="2" />
           <Property Name="NOXCONCENTRATION" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AQI" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AQICATEGORY" Type="nchar" MaxLength="50" />
           <Property Name="ISDISPLAYED" Type="bit" Nullable="false" />
           <Property Name="CREATEDDATE" Type="datetime" Nullable="false" />
           <Property Name="CREATEDBY" Type="nvarchar" MaxLength="50" />
@@ -133,6 +135,8 @@
           <Property Name="SO2CONCENTRATION" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="COCONCENTRATION" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="NOXCONCENTRATION" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AQI" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AQICATEGORY" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="TBL_CONFIGURATION">
           <Key>
@@ -188,6 +192,8 @@
           <EntitySetMapping Name="TBL_ENVIRONMENTDATA">
             <EntityTypeMapping TypeName="AirWatchDBModel.TBL_ENVIRONMENTDATA">
               <MappingFragment StoreEntitySet="TBL_ENVIRONMENTDATA">
+                <ScalarProperty Name="AQICATEGORY" ColumnName="AQICATEGORY" />
+                <ScalarProperty Name="AQI" ColumnName="AQI" />
                 <ScalarProperty Name="NOXCONCENTRATION" ColumnName="NOXCONCENTRATION" />
                 <ScalarProperty Name="COCONCENTRATION" ColumnName="COCONCENTRATION" />
                 <ScalarProperty Name="SO2CONCENTRATION" ColumnName="SO2CONCENTRATION" />

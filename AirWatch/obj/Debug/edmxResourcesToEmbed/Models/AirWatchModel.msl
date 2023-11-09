@@ -34,6 +34,8 @@
     <EntitySetMapping Name="TBL_ENVIRONMENTDATA">
       <EntityTypeMapping TypeName="AirWatchDBModel.TBL_ENVIRONMENTDATA">
         <MappingFragment StoreEntitySet="TBL_ENVIRONMENTDATA">
+          <ScalarProperty Name="AQICATEGORY" ColumnName="AQICATEGORY" />
+          <ScalarProperty Name="AQI" ColumnName="AQI" />
           <ScalarProperty Name="NOXCONCENTRATION" ColumnName="NOXCONCENTRATION" />
           <ScalarProperty Name="COCONCENTRATION" ColumnName="COCONCENTRATION" />
           <ScalarProperty Name="SO2CONCENTRATION" ColumnName="SO2CONCENTRATION" />

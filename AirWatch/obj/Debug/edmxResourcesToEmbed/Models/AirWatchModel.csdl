@@ -54,6 +54,8 @@
     <Property Name="SO2CONCENTRATION" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="COCONCENTRATION" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="NOXCONCENTRATION" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AQI" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AQICATEGORY" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="TBL_CONFIGURATION">
     <Key>
