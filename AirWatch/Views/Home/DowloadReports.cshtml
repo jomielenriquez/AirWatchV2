@@ -43,6 +43,8 @@
                 <th>Tempreature</th>
                 <th>Carbon Monoxide</th>
                 <th>Nitrogen Oxide</th>
+                <th>AQI</th>
+                <th>AQI Category</th>
                 <th>Created Date</th>
             </tr>
         </thead>
@@ -57,6 +59,8 @@
                     <td>@data.TEMPERATURE</td>
                     <td>@data.CARBONMONOXIDE</td>
                     <td>@data.NITROGENOXIDE</td>
+                    <td>@data.AQI</td>
+                    <td>@data.AQICATEGORY</td>
                     <td>@(TimeZoneInfo.ConvertTime(data.CREATEDDATE, taipeiTimeZone))</td>
                 </tr>
             }
@@ -70,6 +74,8 @@
                 <th>Tempreature</th>
                 <th>Carbon Monoxide</th>
                 <th>Nitrogen Oxide</th>
+                <th>AQI</th>
+                <th>AQI Category</th>
                 <th>Created Date</th>
             </tr>
         </tfoot>

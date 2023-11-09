@@ -30,5 +30,7 @@ namespace AirWatch.Models
         public Nullable<decimal> SO2CONCENTRATION { get; set; }
         public Nullable<decimal> COCONCENTRATION { get; set; }
         public Nullable<decimal> NOXCONCENTRATION { get; set; }
+        public Nullable<decimal> AQI { get; set; }
+        public string AQICATEGORY { get; set; }
     }
 }

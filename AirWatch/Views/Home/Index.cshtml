@@ -623,31 +623,13 @@
             //          UPDATE GAUGE               //
             /////////////////////////////////////////
 
-            var AQI = 0;
-            AQI = AQI > data.COCONCENTRATION ? AQI : data.COCONCENTRATION;
-            AQI = AQI > data.NOXCONCENTRATION ? AQI : data.NOXCONCENTRATION;
-            AQI = AQI > data.SO2CONCENTRATION ? AQI : data.SO2CONCENTRATION;
-            AQI = AQI == null ? 0 : AQI;
+            var AQI = data.AQI;
 
             var eqDeg = (AQI / 500) * 180;
 
             needle123.style.transform = 'rotate(' + eqDeg + 'deg)';
 
-            var gaugeResult = "";
-            gaugeResult = gaugeResult >= 0 && gaugeResult <= 50
-                ? "Good"
-                : gaugeResult >= 51 && gaugeResult <= 100
-                    ? "Satisfactory"
-                    : gaugeResult >= 101 && gaugeResult <= 200
-                        ? "Moderately Polluted"
-                        : gaugeResult >= 201 && gaugeResult <= 300
-                            ? "Poor"
-                            : gaugeResult >= 301 && gaugeResult <= 400
-                                ? "Very Poor"
-                                : gaugeResult >= 401 && gaugeResult <= 500
-                                    ? "Severe"
-                                : "Error"
-            document.getElementById("gauge-result").innerHTML = gaugeResult;
+            document.getElementById("gauge-result").innerHTML = data.AQICATEGORY;
         }
 
         $.ajax({

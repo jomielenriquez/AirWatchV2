@@ -79,6 +79,23 @@ namespace AirWatch.Controllers
 
             Data newdata = new Data();
 
+            Decimal SO2 = Decimal.Parse("0.2") * decimal.Parse(data.sulfurdioxide.ToString());
+            Decimal CO = Decimal.Parse("10") * decimal.Parse(data.carbonmonoxide.ToString());
+            Decimal NOX = Decimal.Parse("0.5") * decimal.Parse(data.nitrogenoxide.ToString());
+            Decimal AQI = SO2 > CO ? SO2 > NOX ? SO2 : NOX : CO > NOX ? CO : NOX;
+            string AQICategory = AQI >= 0 && AQI <= 50
+                ? "Good"
+                : AQI >= 51 && AQI <= 100
+                    ? "Satisfactory"
+                    : AQI >= 101 && AQI <= 200
+                        ? "Moderately Polluted"
+                        : AQI >= 201 && AQI <= 300
+                            ? "Poor"
+                            : AQI >= 301 && AQI <= 400
+                                ? "Very Poor"
+                                : AQI >= 401 && AQI <= 500
+                                    ? "Severe"
+                                : "Error";
             TBL_ENVIRONMENTDATA edata = new TBL_ENVIRONMENTDATA() { 
                 HUMIDITY = data.humidity,
                 AMMONIA = data.ammonia,
@@ -86,9 +103,11 @@ namespace AirWatch.Controllers
                 TEMPERATURE = data.temperature,
                 CARBONMONOXIDE = data.carbonmonoxide,
                 NITROGENOXIDE = data.nitrogenoxide,
-                SO2CONCENTRATION = Decimal.Parse("0.2") * decimal.Parse(data.sulfurdioxide.ToString()),
-                COCONCENTRATION = Decimal.Parse("10") * decimal.Parse(data.carbonmonoxide.ToString()),
-                NOXCONCENTRATION = Decimal.Parse("0.5") * decimal.Parse(data.nitrogenoxide.ToString())
+                SO2CONCENTRATION = SO2,
+                COCONCENTRATION = CO,
+                NOXCONCENTRATION = NOX,
+                AQI = AQI,
+                AQICATEGORY = AQICategory
             };
 
             string result =  newdata.Save(edata, new List<string> { "ENVIRONMENTDATEID" }, "ENVIRONMENTDATEID");
