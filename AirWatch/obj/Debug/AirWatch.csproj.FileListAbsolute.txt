@@ -51,10 +51,13 @@ C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\roslyn\vbc.rsp
 C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\roslyn\VBCSCompiler.exe
 C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\Antlr3.Runtime.dll
+C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\EntityFramework.dll
 C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\Newtonsoft.Json.dll
+C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\System.Net.Http.Formatting.dll
 C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\System.Web.Helpers.dll
+C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\System.Web.Http.dll
 C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\System.Web.Mvc.dll
 C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\System.Web.Optimization.dll
 C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\System.Web.Razor.dll
@@ -62,6 +65,9 @@ C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\System.Web.WebPages.Deploymen
 C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\System.Web.WebPages.dll
 C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\System.Web.WebPages.Razor.dll
 C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\WebGrease.dll
+C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\EntityFramework.xml
+C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\System.Net.Http.Formatting.xml
+C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\System.Web.Http.xml
 C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\System.Web.Helpers.xml
 C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\System.Web.Mvc.xml
 C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\System.Web.Optimization.xml
@@ -77,9 +83,3 @@ C:\Users\Jomiel\source\repos\AirWatch\AirWatch\obj\Debug\AirWatch.csproj.CoreCom
 C:\Users\Jomiel\source\repos\AirWatch\AirWatch\obj\Debug\AirWatch.csproj.CopyComplete
 C:\Users\Jomiel\source\repos\AirWatch\AirWatch\obj\Debug\AirWatch.dll
 C:\Users\Jomiel\source\repos\AirWatch\AirWatch\obj\Debug\AirWatch.pdb
-C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\EntityFramework.dll
-C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\EntityFramework.xml
-C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\System.Net.Http.Formatting.dll
-C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\System.Web.Http.dll
-C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\System.Net.Http.Formatting.xml
-C:\Users\Jomiel\source\repos\AirWatch\AirWatch\bin\System.Web.Http.xml
