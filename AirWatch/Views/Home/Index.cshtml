@@ -218,6 +218,18 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <div class="card border-dark mb-4">
+                <div class="card-header">Carbon Monoxide</div>
+                <div class="card-body">
+                    <div id="chartContainer" style="height: 370px; width: 100;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
 </div>
 <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 <script>
@@ -603,6 +615,21 @@
             NitrogenChart.render();
 
             /////////////////////////////////////////
+            //          UPDATE BAR                 //
+            /////////////////////////////////////////
+
+            var dps = chart123.options.data[0].dataPoints;
+            dps[0] = { label: "Humidity", y: data.HUMIDITY };
+            dps[1] = { label: "Ammonia", y: data.AMMONIA };
+            dps[2] = { label: "Sulfur Dioxide", y: data.SULFURDIOXICE };
+            dps[3] = { label: "Temperature", y: data.TEMPERATURE };
+            dps[4] = { label: "Carbon Monoxide", y: data.CARBONMONOXIDE };
+            dps[5] = { label: "Nitrogen Oxide", y: data.NITROGENOXIDE };
+
+            chart123.options.data[0].dataPoints = dps;
+            chart123.render();
+
+            /////////////////////////////////////////
             //          UPDATE GAUGE               //
             /////////////////////////////////////////
 
@@ -614,6 +641,20 @@
 
             document.getElementById("gauge-result").innerHTML = data.AQICATEGORY;
         }
+
+
+        function updateChart() {
+            var boilerColor, deltaY, yVal;
+            var dps = chart123.options.data[0].dataPoints;
+            for (var i = 0; i < dps.length; i++) {
+                deltaY = Math.round(2 + Math.random() * (-2 - 2));
+                yVal = deltaY + dps[i].y > 0 ? dps[i].y + deltaY : 0;
+                boilerColor = yVal > 200 ? "#FF2500" : yVal >= 170 ? "#FF6000" : yVal < 170 ? "#6B8E23 " : null;
+                dps[i] = { label: "Boiler " + (i + 1), y: yVal, color: boilerColor };
+            }
+            chart123.options.data[0].dataPoints = dps;
+            chart123.render();
+        };
 
         $.ajax({
             url: "/Data/GetOneHundred", // API endpoint
@@ -636,6 +677,30 @@
             error: function (error) {
                 console.error("Error:", error);
             }
+        });
+
+        var chart123 = new CanvasJS.Chart("chartContainer", {
+            title: {
+                text: "Current Reading"
+            },
+            axisY: {
+                //title: "Temperature (°C)",
+                includeZero: true,
+                //suffix: " °C"
+            },
+            data: [{
+                type: "column",
+                yValueFormatString: "#,###",
+                indexLabel: "{y}",
+                dataPoints: [
+                    { label: "Humidity", y: 206 },
+                    { label: "Ammonia", y: 163 },
+                    { label: "Sulfur Dioxide", y: 154 },
+                    { label: "Temperature", y: 176 },
+                    { label: "Carbon Monoxide", y: 184 },
+                    { label: "Nitrogen Oxide", y: 122 }
+                ]
+            }]
         });
     }
     function closeModal() {
