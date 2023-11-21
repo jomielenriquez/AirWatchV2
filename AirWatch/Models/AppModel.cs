@@ -62,10 +62,81 @@ namespace AirWatch.Models
             }
         }
         private string datefilter = DateTime.Now.ToString("yyyy-MM-dd");
+        public string DateFrom
+        {
+            get
+            {
+                return dateFrom;
+            }
+            set
+            {
+                dateFrom = value;
+            }
+        }
+        private string dateFrom = DateTime.Now.ToString("yyyy-MM-dd");
+        public string DateTo
+        {
+            get
+            {
+                return dateTo;
+            }
+            set
+            {
+                dateTo = value;
+            }
+        }
+        private string dateTo = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
+        public List<ChartTypes> ChartTypes {
+            get {
+                return chartTypes;
+            }
+            set { 
+                chartTypes = value;
+            }
+        }
+        private List<ChartTypes> chartTypes = new List<ChartTypes>() {
+            new ChartTypes()
+            {
+                ID = 1,
+                Name = "Ammonia"
+            },
+            new ChartTypes()
+            {
+                ID = 2,
+                Name = "Carbon Monoxide"
+            },
+            new ChartTypes()
+            {
+                ID = 3,
+                Name = "Humidity"
+            },
+            new ChartTypes()
+            {
+                ID = 4,
+                Name = "Nitrogen Oxide"
+            },
+            new ChartTypes()
+            {
+                ID = 5,
+                Name = "Sulfur"
+            },
+            new ChartTypes()
+            {
+                ID = 6,
+                Name = "Temperature"
+            },
+        };
+        public int ChartTypeSelected { get; set; }
+        public List<TBL_ENVIRONMENTDATA> readings { get; set; }
     }
     public class ChangePass
     {
         public string firstPass { get; set; }
         public string secondPass { get; set; }
+    }
+    public class ChartTypes
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
     }
 }

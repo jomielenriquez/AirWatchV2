@@ -42,6 +42,23 @@ namespace AirWatch.Controllers
             return View(appModel);
         }
 
+        public ActionResult Readings(AppModel model)
+        {
+            if (model == null)
+            {
+                model = new AppModel();
+            }
+            AppModel appModel = model;
+            if (appModel.Account == null)
+            {
+                return RedirectToAction("../Login/SignIn");
+            }
+
+            model.readings = EnvironmentDataRepository.GetDataByDateRange(DateTime.Parse(model.DateFrom), DateTime.Parse(model.DateTo));
+            
+            return View(appModel);
+        }
+
         public ActionResult Logs(AppModel model)
         {
             // This code will return user to the login page if there is no session

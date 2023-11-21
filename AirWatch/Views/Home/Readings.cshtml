@@ -1,0 +1,172 @@
+﻿@model AirWatch.Models.AppModel
+
+@{
+    ViewBag.Title = "Readings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="background-color: white !important; padding: 10px; border-radius:10px">
+
+    <h2>Readings</h2>
+
+    <div class="alert alert-dismissible alert-light">
+        @using (Html.BeginForm("Readings", "Home", FormMethod.Post, new { id = "FilerForm" }))
+        {
+            <fieldset>
+                <div class="form-group">
+                    <label for="inputFilterDate" class="form-label mt-4">Date From</label>
+                    @Html.TextBoxFor(model => model.DateFrom, new { @id = "inputFilterDateFrom", @class = "form-control", @placeholder = "Date", @type = "Date", onchange = "submitForm()", style = "width: 300px" })
+                </div>
+                <div class="form-group">
+                    <label for="inputFilterDate" class="form-label mt-4">Date To</label>
+                    @Html.TextBoxFor(model => model.DateTo, new { @id = "inputFilterDateTo", @class = "form-control", @placeholder = "Date", @type = "Date", onchange = "submitForm()", style = "width: 300px" })
+                </div>
+                <div class="form-group">
+                    <label for="inputFilterDate" class="form-label mt-4">Date To</label>
+                    @Html.DropDownListFor(model => model.ChartTypeSelected, new SelectList(Model.ChartTypes, "ID", "Name"), "Select Chart Type...", new { @class = "form-control", @id = "Type", onchange = "submitForm()" })
+                </div>
+            </fieldset>
+        }
+        <script>
+            function submitForm() {
+                document.getElementById("FilerForm").submit();
+            }
+        </script>
+    </div>
+    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+    @if (Model.ChartTypeSelected != 0)
+    {
+        <div class="bs-docs-section">
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <div class="card border-dark mb-4">
+                        <div class="card-header">Readings</div>
+                        <div class="card-body">
+                            <div id="selectedChart" style="height: 370px; "></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+        </div>
+    
+        <script>
+            window.onload = function () {
+
+                var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.readings));
+                var selected = @Html.Raw(Model.ChartTypeSelected);
+                if (data.length > 0) {
+                    var hummidityDataPoints1 = [];
+                    var chart = new CanvasJS.Chart("selectedChart", {
+                        zoomEnabled: true,
+                        title: {
+                            //text: "Share Value of Two Companies"  // remove title
+                        },
+                        axisX: {
+                            //title: "chart updates every " + updateInterval + " secs"
+                        },
+                        axisY: {
+                            //title: " Humidity"
+                        },
+                        toolTip: {
+                            shared: true
+                        },
+                        legend: {
+                            cursor: "pointer",
+                            verticalAlign: "top",
+                            fontSize: 22,
+                            fontColor: "dimGrey",
+                            itemclick: toggleDataSeries
+                        },
+                        data: [
+                            {
+                                type: "line",
+                                xValueType: "dateTime",
+                                yValueFormatString: "####.00",
+                                xValueFormatString: "hh:mm:ss TT",
+                                showInLegend: true,
+                                name: "Humidity",
+                                prefix: "test",
+                                dataPoints: hummidityDataPoints1,
+                                color: "green"
+                            },
+                            //{
+                            //    type: "line",
+                            //    xValueType: "dateTime",
+                            //    yValueFormatString: "$####.00",
+                            //    showInLegend: true,
+                            //    name: "Company B",
+                            //    dataPoints: dataPoints2
+                            //}
+                        ]
+                    });
+
+                    var title = "";
+
+                    data.forEach(function (item) {
+                        console.log(item);
+                        var value = 0;
+                        if (selected == 1) {
+                            value = item.AMMONIA
+                            title = "Ammonia";
+                        }
+                        if (selected == 2) {
+                            value = item.CARBONMONOXIDE
+                            title = "Carbon Monoxide";
+                        }
+                        if (selected == 3) {
+                            value = item.HUMIDITY
+                            title = "Humidity";
+                        }
+                        if (selected == 4) {
+                            value = item.NITROGENOXIDE
+                            title = "Nitrogent Oxide";
+                        }
+                        if (selected == 5) {
+                            value = item.SULFURDIOXICE
+                            title = "Sulfur Dioxide";
+                        }
+                        if (selected == 6) {
+                            value = item.TEMPERATURE
+                            title = "Temperature";
+                        }
+                        var ex = new Date(item.CREATEDDATE);
+                        console.log(ex);
+                        console.log(item.CREATEDDATE);
+                        hummidityDataPoints1.push({
+                            x: ex,
+                            y: value
+                        });
+                    })
+
+                    chart.options.data[0].legendText = " " + title;
+                    chart.render();
+                }
+            }
+            function toggleDataSeries(e) {
+                if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                    e.dataSeries.visible = false;
+                }
+                else {
+                    e.dataSeries.visible = true;
+                }
+                chart.render();
+            }
+            function microsoftJsonDateToJsDate(msJsonDate) {
+                // Extract the numeric part (ticks) from the string
+                const match = /\/Date\((\d+)\)\//.exec(msJsonDate);
+                if (!match || match.length < 2) {
+                    throw new Error('Invalid Microsoft JSON Date format.');
+                }
+
+                // Convert the ticks to milliseconds
+                const ticks = parseInt(match[1], 10);
+
+                // Create a JavaScript Date object using the milliseconds (interpreted as UTC)
+                const jsDateUtc = new Date(ticks);
+
+                return jsDateUtc;
+            }
+        </script>
+    }
+</div>

@@ -9,77 +9,94 @@
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" />
+<div style="background-color: white !important; padding: 10px; border-radius:10px">
+    <h2>Dowload Reports</h2>
 
-<h2>Dowload Reports</h2>
-
-<div class="alert alert-dismissible alert-light">
-    @using (Html.BeginForm("DowloadReports", "Home", FormMethod.Post, new { id = "FilerForm" }))
-    {
-        <fieldset>
-            @*<legend>Logs</legend>*@
-            <div class="form-group">
-                <label for="inputFilterDate" class="form-label mt-4">Filter Date</label>
-                @Html.TextBoxFor(model => model.DateFilter, new { @id = "inputFilterDate", @class = "form-control", @placeholder = "Date", @type = "Date", onchange = "submitForm()", style = "width: 300px" })
-            </div>
-        </fieldset>
-    }
-    <script>
-        function submitForm() {
-            document.getElementById("FilerForm").submit();
+    <div class="alert alert-dismissible alert-light">
+        @using (Html.BeginForm("DowloadReports", "Home", FormMethod.Post, new { id = "FilerForm" }))
+        {
+            <fieldset>
+                @*<legend>Logs</legend>*@
+                <div class="form-group">
+                    <label for="inputFilterDate" class="form-label mt-4">Filter Date</label>
+                    @Html.TextBoxFor(model => model.DateFilter, new { @id = "inputFilterDate", @class = "form-control", @placeholder = "Date", @type = "Date", onchange = "submitForm()", style = "width: 300px" })
+                </div>
+            </fieldset>
         }
-    </script>
-</div>
-@{
-    TimeZoneInfo taipeiTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Taipei Standard Time");
-}
-<div style="overflow-y:auto;">
-    <table id="example" class="display nowrap" style="width:100%">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Humidity</th>
-                <th>Ammonia</th>
-                <th>Sulfur Dioxide</th>
-                <th>Tempreature</th>
-                <th>Carbon Monoxide</th>
-                <th>Nitrogen Oxide</th>
-                <th>AQI</th>
-                <th>AQI Category</th>
-                <th>Created Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (AirWatch.Models.TBL_ENVIRONMENTDATA data in Model.Data)
-            {
-                <tr>
-                    <td>@data.EDID</td>
-                    <td>@data.HUMIDITY</td>
-                    <td>@data.AMMONIA</td>
-                    <td>@data.SULFURDIOXICE</td>
-                    <td>@data.TEMPERATURE</td>
-                    <td>@data.CARBONMONOXIDE</td>
-                    <td>@data.NITROGENOXIDE</td>
-                    <td>@data.AQI</td>
-                    <td>@data.AQICATEGORY</td>
-                    <td>@(TimeZoneInfo.ConvertTime(data.CREATEDDATE, taipeiTimeZone))</td>
-                </tr>
+        <script>
+            function submitForm() {
+                document.getElementById("FilerForm").submit();
             }
-        </tbody>
-        <tfoot>
-            <tr>
-                <th>ID</th>
-                <th>Humidity</th>
-                <th>Ammonia</th>
-                <th>Sulfur Dioxide</th>
-                <th>Tempreature</th>
-                <th>Carbon Monoxide</th>
-                <th>Nitrogen Oxide</th>
-                <th>AQI</th>
-                <th>AQI Category</th>
-                <th>Created Date</th>
-            </tr>
-        </tfoot>
-    </table>
+        </script>
+    </div>
+    @{
+        TimeZoneInfo taipeiTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Taipei Standard Time");
+    }
+    <div style="overflow-y:auto;">
+        <table id="example" class="display nowrap" style="width:100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Humidity</th>
+                    <th>Ammonia</th>
+                    <th>Sulfur Dioxide</th>
+                    <th>Temperature</th>
+                    <th>Carbon Monoxide</th>
+                    <th>Nitrogen Oxide</th>
+                    <th>AQI</th>
+                    <th>AQI Category</th>
+                    <th>Created Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (AirWatch.Models.TBL_ENVIRONMENTDATA data in Model.Data)
+                {
+                    var color = data.AQICATEGORY?.Trim() == "Good" ? "#1eaa59"
+                        : data.AQICATEGORY?.Trim() == "Satisfactory" ? "#9baa1e"
+                        : data.AQICATEGORY?.Trim() == "Moderately Polluted" ? "#f0c30f"
+                        : data.AQICATEGORY?.Trim() == "Poor" ? "#e67e22"
+                        : data.AQICATEGORY?.Trim() == "Very Poor" ? "#e84c3d"
+                        : data.AQICATEGORY?.Trim() == "Severe" ? "#e84c3d"
+                        : "white";
+
+                    var textcolor = data.AQICATEGORY?.Trim() == "Good" ? "white"
+                        : data.AQICATEGORY?.Trim() == "Satisfactory" ? "white"
+                        : data.AQICATEGORY?.Trim() == "Moderately Polluted" ? "black"
+                        : data.AQICATEGORY?.Trim() == "Poor" ? "black"
+                        : data.AQICATEGORY?.Trim() == "Very Poor" ? "black"
+                        : data.AQICATEGORY?.Trim() == "Severe" ? "black"
+                        : "black";
+
+                    <tr style="background-color:@color; color: @textcolor">
+                        <td>@data.EDID</td>
+                        <td>@data.HUMIDITY</td>
+                        <td>@data.AMMONIA</td>
+                        <td>@data.SULFURDIOXICE</td>
+                        <td>@data.TEMPERATURE</td>
+                        <td>@data.CARBONMONOXIDE</td>
+                        <td>@data.NITROGENOXIDE</td>
+                        <td>@data.AQI</td>
+                        <td>@data.AQICATEGORY</td>
+                        <td>@(TimeZoneInfo.ConvertTime(data.CREATEDDATE, taipeiTimeZone))</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>ID</th>
+                    <th>Humidity</th>
+                    <th>Ammonia</th>
+                    <th>Sulfur Dioxide</th>
+                    <th>Temperature</th>
+                    <th>Carbon Monoxide</th>
+                    <th>Nitrogen Oxide</th>
+                    <th>AQI</th>
+                    <th>AQI Category</th>
+                    <th>Created Date</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 </div>
 
 <script>
@@ -87,7 +104,25 @@
         $('#example').DataTable({
             dom: 'Bfrtip',
             buttons: [
-                'csv', 'pdf', 'print'
+                {
+                    extend: 'print',
+                    text: 'Print',
+                    customize: function (win) {
+                        $(win.document.body)
+                            .css('font-size', '10pt')
+                            .prepend(
+                                '<img src="@Url.Content("~/Image/Malvar_Logo.png")" style="position:absolute; top:20%; left:25%; opacity:0.5; width: 50%" />'
+                            );
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    text: 'PDF'
+                }
+                ,'csv'
             ]
         });
     });
