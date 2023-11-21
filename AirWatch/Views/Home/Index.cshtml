@@ -135,13 +135,14 @@
             transform-origin: right;
             right: 52px;
         }
+
     .gauge-category, .gauge-title {
         text-align: center;
     }
 </style>
 <script>
     document.addEventListener("DOMContentLoaded", function (event) {
-        
+
     });
 </script>
 <div class="bs-docs-section">
@@ -219,6 +220,13 @@
 <script>
     var currentEDID = 0;
     var needle123 = document.querySelector('.needle');
+    var humidityLimit = 100;
+    var ammoniaLimit = 100;
+    var sulfurLimit = 100;
+    var temperatureLimit = 100;
+    var carbonMonoxideLimit = 100;
+    var nitrogenOxideLimit = 100;
+
     window.onload = function () {
         needle123.style.transform = 'rotate(0deg)'; // set needle value
 
@@ -477,50 +485,6 @@
             chart.render();
         }
 
-        //var updateInterval = 3000;
-        //// initial value
-        //var yValue1 = 600;
-        //var yValue2 = 605;
-
-        //var time = new Date;
-        //// starting at 9.30 am
-        //time.setHours(9);
-        //time.setMinutes(30);
-        //time.setSeconds(00);
-        //time.setMilliseconds(00);
-
-        //function updateChart(count) {
-        //    count = count || 1;
-        //    var deltaY1, deltaY2;
-        //    for (var i = 0; i < count; i++) {
-        //        time.setTime(time.getTime() + updateInterval);
-        //        deltaY1 = .5 + Math.random() * (-.5 - .5);
-        //        //deltaY2 = .5 + Math.random() * (-.5 - .5);
-
-        //        // adding random value and rounding it to two digits.
-        //        yValue1 = Math.round((yValue1 + deltaY1) * 100) / 100;
-        //        //yValue2 = Math.round((yValue2 + deltaY2) * 100) / 100;
-
-        //        // pushing the new values
-        //        dataPoints1.push({
-        //            x: time.getTime(),
-        //            y: yValue1
-        //        });
-        //        //dataPoints2.push({
-        //        //    x: time.getTime(),
-        //        //    y: yValue2
-        //        //});
-        //    }
-
-        //    // updating legend text with  updated with y Value
-        //    chart.options.data[0].legendText = " Humidity " + yValue1;
-        //    //chart.options.data[1].legendText = " Company B  $" + yValue2;
-        //    chart.render();
-        //}
-        // generates first set of dataPoints
-        //updateChart(100);
-        //setInterval(function () { updateChart() }, updateInterval);
-
         function getdata() {
             $.ajax({
                 url: "/Data/GetData", // API endpoint
@@ -530,6 +494,30 @@
                     var prevEDID = currentEDID;
                     currentEDID = data.EDID;
                     if (currentEDID > prevEDID) {
+                        if (data.AMMONIA > ammoniaLimit) {
+                            $("#notificationBody").text("Amonnia readings is above average");
+                            $("#notificationModal").modal("show");
+                        }
+                        else if (data.CARBONMONOXIDE > carbonMonoxideLimit) {
+                            $("#notificationBody").text("Carbon Monoxide readings is above average");
+                            $("#notificationModal").modal("show");
+                        }
+                        else if (data.HUMIDITY > humidityLimit) {
+                            $("#notificationBody").text("Humidity readings is above average");
+                            $("#notificationModal").modal("show");
+                        }
+                        else if (data.NITROGENOXIDE > nitrogenOxideLimit) {
+                            $("#notificationBody").text("Nitrogen Oxide readings is above average");
+                            $("#notificationModal").modal("show");
+                        }
+                        else if (data.SULFURDIOXICE > sulfurLimit) {
+                            $("#notificationBody").text("Sulfur Oxide readings is above average");
+                            $("#notificationModal").modal("show");
+                        }
+                        else if (data.TEMPERATURE > temperatureLimit) {
+                            $("#notificationBody").text("Temperature readings is above average");
+                            $("#notificationModal").modal("show");
+                        }
                         RenderChartData(data);
                     }
                 },
@@ -654,6 +642,27 @@
                 console.error("Error:", error);
             }
         });
-
+    }
+    function closeModal() {
+        $("#notificationModal").modal("hide");
     }
 </script>
+
+<!-- Modal -->
+<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:red;">
+                <div style="margin: 0 auto; color: white">
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Warning!</h5>
+                </div>
+            </div>
+            <div class="modal-body" id="notificationBody">
+                Amonnia readings is above average
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
