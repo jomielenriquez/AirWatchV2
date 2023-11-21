@@ -11,6 +11,9 @@
         padding: 35px 40px 40px;
         border-radius: 6px;
         box-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.32), 0 1px 9px -1px #15222e;
+        margin-top: 123px;
+        margin-bottom: 127px;
+        scale: 2;
     }
 
     .heart {
@@ -215,17 +218,29 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <div class="card border-dark mb-4">
+                <div class="card-header">Carbon Monoxide</div>
+                <div class="card-body">
+                    <div id="chartContainer" style="height: 370px; width: 100;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
 </div>
 <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 <script>
     var currentEDID = 0;
     var needle123 = document.querySelector('.needle');
     var humidityLimit = 100;
-    var ammoniaLimit = 100;
-    var sulfurLimit = 100;
+    var ammoniaLimit = 450;
+    var sulfurLimit = 50;
     var temperatureLimit = 100;
-    var carbonMonoxideLimit = 100;
-    var nitrogenOxideLimit = 100;
+    var carbonMonoxideLimit = 50;
+    var nitrogenOxideLimit = 50;
 
     window.onload = function () {
         needle123.style.transform = 'rotate(0deg)'; // set needle value
@@ -270,8 +285,7 @@
                 title: "chart updates every " + updateInterval + " secs"
             },
             axisY: {
-                //prefix: "$"
-                title: " Humidity"
+                //title: " Humidity"
             },
             toolTip: {
                 shared: true
@@ -291,6 +305,7 @@
                     xValueFormatString: "hh:mm:ss TT",
                     showInLegend: true,
                     name: "Humidity",
+                    prefix: "test",
                     dataPoints: hummidityDataPoints1,
                     color: "green"
                 },
@@ -313,7 +328,7 @@
                 title: "chart updates every " + updateInterval + " secs"
             },
             axisY: {
-                title: " Ammonia"
+                //title: " Ammonia"
             },
             toolTip: {
                 shared: true
@@ -347,7 +362,7 @@
                 title: "chart updates every " + updateInterval + " secs"
             },
             axisY: {
-                title: " SULFUR DIOXIDE"
+                //title: " SULFUR DIOXIDE"
             },
             toolTip: {
                 shared: true
@@ -381,7 +396,7 @@
                 title: "chart updates every " + updateInterval + " secs"
             },
             axisY: {
-                title: " Ammonia"
+                //title: " Ammonia"
             },
             toolTip: {
                 shared: true
@@ -415,7 +430,7 @@
                 title: "chart updates every " + updateInterval + " secs"
             },
             axisY: {
-                title: " Ammonia"
+                //title: " Ammonia"
             },
             toolTip: {
                 shared: true
@@ -449,7 +464,7 @@
                 title: "chart updates every " + updateInterval + " secs"
             },
             axisY: {
-                title: " Ammonia"
+                //title: " Ammonia"
             },
             toolTip: {
                 shared: true
@@ -502,20 +517,12 @@
                             $("#notificationBody").text("Carbon Monoxide readings is above average");
                             $("#notificationModal").modal("show");
                         }
-                        else if (data.HUMIDITY > humidityLimit) {
-                            $("#notificationBody").text("Humidity readings is above average");
-                            $("#notificationModal").modal("show");
-                        }
                         else if (data.NITROGENOXIDE > nitrogenOxideLimit) {
                             $("#notificationBody").text("Nitrogen Oxide readings is above average");
                             $("#notificationModal").modal("show");
                         }
                         else if (data.SULFURDIOXICE > sulfurLimit) {
                             $("#notificationBody").text("Sulfur Oxide readings is above average");
-                            $("#notificationModal").modal("show");
-                        }
-                        else if (data.TEMPERATURE > temperatureLimit) {
-                            $("#notificationBody").text("Temperature readings is above average");
                             $("#notificationModal").modal("show");
                         }
                         RenderChartData(data);
@@ -554,7 +561,7 @@
                 x: ex,
                 y: data.HUMIDITY
             });
-            chart.options.data[0].legendText = " Humidity " + data.HUMIDITY;
+            chart.options.data[0].legendText = " Humidity " + data.HUMIDITY + "%";
             chart.render();
 
             /////////////////////////////////////////
@@ -574,7 +581,7 @@
                 x: ex,
                 y: data.SULFURDIOXICE
             });
-            sulfurChart.options.data[0].legendText = " Sulfur " + data.SULFURDIOXICE;
+            sulfurChart.options.data[0].legendText = " Sulfur " + data.SULFURDIOXICE + " 4 µg/m³";
             sulfurChart.render();
 
             /////////////////////////////////////////
@@ -584,7 +591,7 @@
                 x: ex,
                 y: data.TEMPERATURE
             });
-            temperatureChart.options.data[0].legendText = " Temperature " + data.TEMPERATURE;
+            temperatureChart.options.data[0].legendText = " Temperature " + data.TEMPERATURE + "°C";
             temperatureChart.render();
 
             /////////////////////////////////////////
@@ -594,7 +601,7 @@
                 x: ex,
                 y: data.CARBONMONOXIDE
             });
-            carbonChart.options.data[0].legendText = " Carbon Monoxide " + data.CARBONMONOXIDE;
+            carbonChart.options.data[0].legendText = " Carbon Monoxide " + data.CARBONMONOXIDE + "169 µg/m³";
             carbonChart.render();
 
             /////////////////////////////////////////
@@ -604,8 +611,23 @@
                 x: ex,
                 y: data.NITROGENOXIDE
             });
-            NitrogenChart.options.data[0].legendText = " Nitrogen Oxide " + data.NITROGENOXIDE;
+            NitrogenChart.options.data[0].legendText = " Nitrogen Oxide " + data.NITROGENOXIDE + "1 µg/m³";
             NitrogenChart.render();
+
+            /////////////////////////////////////////
+            //          UPDATE BAR                 //
+            /////////////////////////////////////////
+
+            var dps = chart123.options.data[0].dataPoints;
+            dps[0] = { label: "Humidity", y: data.HUMIDITY };
+            dps[1] = { label: "Ammonia", y: data.AMMONIA };
+            dps[2] = { label: "Sulfur Dioxide", y: data.SULFURDIOXICE };
+            dps[3] = { label: "Temperature", y: data.TEMPERATURE };
+            dps[4] = { label: "Carbon Monoxide", y: data.CARBONMONOXIDE };
+            dps[5] = { label: "Nitrogen Oxide", y: data.NITROGENOXIDE };
+
+            chart123.options.data[0].dataPoints = dps;
+            chart123.render();
 
             /////////////////////////////////////////
             //          UPDATE GAUGE               //
@@ -619,6 +641,20 @@
 
             document.getElementById("gauge-result").innerHTML = data.AQICATEGORY;
         }
+
+
+        function updateChart() {
+            var boilerColor, deltaY, yVal;
+            var dps = chart123.options.data[0].dataPoints;
+            for (var i = 0; i < dps.length; i++) {
+                deltaY = Math.round(2 + Math.random() * (-2 - 2));
+                yVal = deltaY + dps[i].y > 0 ? dps[i].y + deltaY : 0;
+                boilerColor = yVal > 200 ? "#FF2500" : yVal >= 170 ? "#FF6000" : yVal < 170 ? "#6B8E23 " : null;
+                dps[i] = { label: "Boiler " + (i + 1), y: yVal, color: boilerColor };
+            }
+            chart123.options.data[0].dataPoints = dps;
+            chart123.render();
+        };
 
         $.ajax({
             url: "/Data/GetOneHundred", // API endpoint
@@ -641,6 +677,30 @@
             error: function (error) {
                 console.error("Error:", error);
             }
+        });
+
+        var chart123 = new CanvasJS.Chart("chartContainer", {
+            title: {
+                text: "Current Reading"
+            },
+            axisY: {
+                //title: "Temperature (°C)",
+                includeZero: true,
+                //suffix: " °C"
+            },
+            data: [{
+                type: "column",
+                yValueFormatString: "#,###",
+                indexLabel: "{y}",
+                dataPoints: [
+                    { label: "Humidity", y: 206 },
+                    { label: "Ammonia", y: 163 },
+                    { label: "Sulfur Dioxide", y: 154 },
+                    { label: "Temperature", y: 176 },
+                    { label: "Carbon Monoxide", y: 184 },
+                    { label: "Nitrogen Oxide", y: 122 }
+                ]
+            }]
         });
     }
     function closeModal() {

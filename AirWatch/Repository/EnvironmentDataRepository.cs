@@ -44,5 +44,20 @@ namespace AirWatch.Repository
 
             return top100Data;
         }
+        public static List<TBL_ENVIRONMENTDATA> GetDataByDateRange(DateTime dateFrom, DateTime dateTo)
+        {
+            DateTime currentDate = dateFrom.Date; // Get the current date without time
+            DateTime nextDay = dateTo.Date; // Get the start of the next day
+
+            AirWatchDBEntities airWatchDBEntities = new AirWatchDBEntities();
+            List<TBL_ENVIRONMENTDATA> top100Data = airWatchDBEntities.TBL_ENVIRONMENTDATA
+                .Where(env => env.CREATEDDATE >= currentDate && env.CREATEDDATE < nextDay)
+                .OrderByDescending(env => env.CREATEDDATE)
+                .ToList();
+
+            top100Data = top100Data.OrderBy(env => env.EDID).ToList();
+
+            return top100Data;
+        }
     }
 }

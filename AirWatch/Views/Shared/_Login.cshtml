@@ -28,6 +28,18 @@
         .content {
             display: none; /* Initially hide the content */
         }
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('@Url.Content("~/Image/cover.jpg")');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100vh; /* Set the body height to 100% of the viewport height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
