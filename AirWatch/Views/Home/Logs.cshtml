@@ -52,7 +52,22 @@
             <tbody>
                 @foreach (AirWatch.Models.TBL_ENVIRONMENTDATA data in Model.Data)
                 {
-                    <tr>
+                    var color = data.AQICATEGORY?.Trim() == "Good" ? "#1eaa59"
+                        : data.AQICATEGORY?.Trim() == "Satisfactory" ? "#9baa1e"
+                        : data.AQICATEGORY?.Trim() == "Moderately Polluted" ? "#f0c30f"
+                        : data.AQICATEGORY?.Trim() == "Poor" ? "#e67e22"
+                        : data.AQICATEGORY?.Trim() == "Very Poor" ? "#e84c3d"
+                        : data.AQICATEGORY?.Trim() == "Severe" ? "#e84c3d"
+                        : "white";
+
+                    var textcolor = data.AQICATEGORY?.Trim() == "Good" ? "white"
+                        : data.AQICATEGORY?.Trim() == "Satisfactory" ? "white"
+                        : data.AQICATEGORY?.Trim() == "Moderately Polluted" ? "black"
+                        : data.AQICATEGORY?.Trim() == "Poor" ? "black"
+                        : data.AQICATEGORY?.Trim() == "Very Poor" ? "black"
+                        : data.AQICATEGORY?.Trim() == "Severe" ? "black"
+                        : "black";
+                    <tr style="background-color:@color; color: @textcolor">
                         <td>@data.EDID</td>
                         <td>@data.HUMIDITY</td>
                         <td>@data.AMMONIA</td>
@@ -90,7 +105,8 @@
             dom: 'Bfrtip',
             buttons: [
                 //'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
+            ],
+            order: [[9, 'desc']]
         });
     });
 </script>
