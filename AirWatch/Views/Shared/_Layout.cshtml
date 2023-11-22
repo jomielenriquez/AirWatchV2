@@ -59,15 +59,18 @@
                 <li class="@(ViewBag.Title == "Logs" ? "active": "")">
                     <a href="@Url.Action("Logs", "Home")"><i class="fa fa-file-text" aria-hidden="true"></i></a>
                 </li>
+                <li class="@(ViewBag.Title == "Readings" ? "active": "")">
+                    <a href="@Url.Action("Readings", "Home")"><i class="fa fa-bar-chart" aria-hidden="true"></i></a>
+                </li>
                 <li>
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cog" aria-hidden="true"></i></a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
                             <a href="#" data-toggle="modal" data-target="#changePassModal"><i class="fa fa-key" aria-hidden="true"></i></a>
                         </li>
-                        <li>
+                        @*<li>
                             <a href="@Url.Action("Readings", "Home")"><i class="fa fa-bar-chart" aria-hidden="true"></i></a>
-                        </li>
+                        </li>*@
                         <li>
                             <a href="@Url.Action("Logout", "Login")"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
                         </li>
