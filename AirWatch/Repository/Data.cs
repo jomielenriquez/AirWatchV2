@@ -22,6 +22,12 @@ namespace AirWatch.Repository
             string tableName = Class.GetType().Name;
             string[] except = { "createddate", "updateddate", "updatedby", "edid" };
 
+            if(tableName == "TBL_ENVIRONMENTDATA")
+            {
+                string stringToRemove = "createddate";
+                except = except.Except(new[] { stringToRemove }).ToArray();
+            }
+
             except = except.Concat(filter.ToArray()).ToArray();
 
             var Properties = Class
@@ -58,7 +64,7 @@ namespace AirWatch.Repository
                     {
                         foreach (string prop in Properties)
                         {
-                            if (Class.GetType().GetProperty(prop).PropertyType == typeof(Nullable<System.DateTime>))
+                            if (Class.GetType().GetProperty(prop).PropertyType == typeof(Nullable<System.DateTime>) || Class.GetType().GetProperty(prop).PropertyType == typeof(System.DateTime))
                             {
                                 command.Parameters.AddWithValue("@" + prop, ((DateTime)getValue(prop, Class)).ToString("MM/dd/yyyy HH:mm:ss"));
                             }

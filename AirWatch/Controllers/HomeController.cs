@@ -37,7 +37,7 @@ namespace AirWatch.Controllers
             }
 
             List<TBL_ENVIRONMENTDATA> envData = EnvironmentDataRepository.GetDataByDate(DateTime.Parse(model.DateFilter));
-            appModel.DateFilter = DateTime.Now.ToString("yyyy-MM-dd");
+            appModel.DateFilter = model.DateFilter;
             appModel.Data = envData;
             return View(appModel);
         }
@@ -73,7 +73,7 @@ namespace AirWatch.Controllers
             }
 
             List<TBL_ENVIRONMENTDATA> envData = EnvironmentDataRepository.GetDataByDate(DateTime.Parse(model.DateFilter));
-            appModel.DateFilter = DateTime.Now.ToString("yyyy-MM-dd");
+            appModel.DateFilter = model.DateFilter;
             appModel.Data = envData;
             return View(appModel);
         }

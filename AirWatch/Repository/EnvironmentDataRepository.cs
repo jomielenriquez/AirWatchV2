@@ -34,15 +34,26 @@ namespace AirWatch.Repository
             DateTime currentDate = date.Date; // Get the current date without time
             DateTime nextDay = currentDate.AddDays(1); // Get the start of the next day
 
-            AirWatchDBEntities airWatchDBEntities = new AirWatchDBEntities();
-            List<TBL_ENVIRONMENTDATA> top100Data = airWatchDBEntities.TBL_ENVIRONMENTDATA
-                .Where(env => env.CREATEDDATE >= currentDate && env.CREATEDDATE < nextDay)
-                .OrderByDescending(env => env.CREATEDDATE)
-                .ToList();
+            //AirWatchDBEntities airWatchDBEntities = new AirWatchDBEntities();
+            //List<TBL_ENVIRONMENTDATA> top100Data = airWatchDBEntities.TBL_ENVIRONMENTDATA
+            //    .Where(env => env.CREATEDDATE >= currentDate && env.CREATEDDATE < nextDay)
+            //    .OrderByDescending(env => env.CREATEDDATE)
+            //    .ToList();
 
-            top100Data = top100Data.OrderBy(env => env.EDID).ToList();
+            //top100Data = top100Data.OrderBy(env => env.EDID).ToList();
 
-            return top100Data;
+            //return top100Data;
+            using (AirWatchDBEntities airWatchDBEntities = new AirWatchDBEntities())
+            {
+                List<TBL_ENVIRONMENTDATA> top100Data = airWatchDBEntities.TBL_ENVIRONMENTDATA
+                    .Where(env => env.CREATEDDATE >= currentDate && env.CREATEDDATE < nextDay)
+                    .OrderByDescending(env => env.CREATEDDATE)
+                    .ThenBy(env => env.EDID) // Use ThenBy for secondary sorting
+                    //.Take(100) // Limit the result to the top 100 records
+                    .ToList();
+
+                return top100Data;
+            }
         }
         public static List<TBL_ENVIRONMENTDATA> GetDataByDateRange(DateTime dateFrom, DateTime dateTo)
         {

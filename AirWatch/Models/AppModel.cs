@@ -61,7 +61,7 @@ namespace AirWatch.Models
                 datefilter = value;
             }
         }
-        private string datefilter = DateTime.Now.ToString("yyyy-MM-dd");
+        private string datefilter = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
         public string DateFrom
         {
             get
@@ -73,7 +73,7 @@ namespace AirWatch.Models
                 dateFrom = value;
             }
         }
-        private string dateFrom = DateTime.Now.ToString("yyyy-MM-dd");
+        private string dateFrom = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
         public string DateTo
         {
             get
@@ -85,7 +85,7 @@ namespace AirWatch.Models
                 dateTo = value;
             }
         }
-        private string dateTo = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
+        private string dateTo = DateTime.Now.AddDays(2).ToString("yyyy-MM-dd");
         public List<ChartTypes> ChartTypes {
             get {
                 return chartTypes;

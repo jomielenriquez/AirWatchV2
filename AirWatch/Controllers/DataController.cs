@@ -96,7 +96,23 @@ namespace AirWatch.Controllers
                                 : AQI >= 401 && AQI <= 500
                                     ? "Severe"
                                 : "Error";
-            TBL_ENVIRONMENTDATA edata = new TBL_ENVIRONMENTDATA() { 
+            TimeZoneInfo taipeiTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Taipei Standard Time");
+
+            //DateTime gmtPlus1Time = DateTime.Now; // Replace with your GMT+1 time
+
+            //// Specify the time zone for GMT+1
+            //TimeZoneInfo gmtPlus1TimeZone = TimeZoneInfo.FindSystemTimeZoneById("W. Europe Standard Time");
+
+            //// Convert GMT+1 time to UTC
+            //DateTime utcTime = TimeZoneInfo.ConvertTimeToUtc(gmtPlus1Time, gmtPlus1TimeZone);
+
+            //// Specify the time zone for UTC+8 (Taipei)
+            //TimeZoneInfo utcPlus8TimeZone = TimeZoneInfo.FindSystemTimeZoneById("Taipei Standard Time");
+
+            //// Convert UTC time to UTC+8
+            //DateTime utcPlus8Time = TimeZoneInfo.ConvertTimeFromUtc(utcTime, utcPlus8TimeZone);
+
+            TBL_ENVIRONMENTDATA edata = new TBL_ENVIRONMENTDATA() {
                 HUMIDITY = data.humidity,
                 AMMONIA = data.ammonia,
                 SULFURDIOXICE = data.sulfurdioxide,
@@ -107,7 +123,9 @@ namespace AirWatch.Controllers
                 COCONCENTRATION = CO,
                 NOXCONCENTRATION = NOX,
                 AQI = AQI,
-                AQICATEGORY = AQICategory
+                AQICATEGORY = AQICategory,
+                CREATEDDATE = TimeZoneInfo.ConvertTime(DateTime.Now, taipeiTimeZone)
+                //CREATEDDATE = utcPlus8Time
             };
 
             string result =  newdata.Save(edata, new List<string> { "ENVIRONMENTDATEID" }, "ENVIRONMENTDATEID");

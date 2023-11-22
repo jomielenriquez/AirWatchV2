@@ -222,7 +222,7 @@
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
             <div class="card border-dark mb-4">
-                <div class="card-header">Carbon Monoxide</div>
+                <div class="card-header">Current Reading</div>
                 <div class="card-body">
                     <div id="chartContainer" style="height: 370px; width: 100;"></div>
                 </div>
@@ -230,7 +230,416 @@
         </div>
         <div class="col-lg-2"></div>
     </div>
+    <link rel="stylesheet" href="https://www.awxcdn.com/adc-assets/bundles/8002.55fb496a5ab5a992c549.css">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <div class="air-quality-current-pollutants pollutants">
+                <div class="tabs-nav">
+
+                    <div class="horizontal-menu tabs">
+                        <div class="overflow overflow-left">
+                            <svg class="arrow chevron-icon left" xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6"><path d="M10 .969L9.037 0 5 4.063.963 0 0 .969 5 6z"></path></svg>
+                        </div>
+                        <div class="overflow overflow-right">
+                            <svg class="arrow chevron-icon right" xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6"><path d="M10 .969L9.037 0 5 4.063.963 0 0 .969 5 6z"></path></svg>
+                        </div>
+                        <div class="menu-items">
+
+                            <h2 id="current-pollutants" class="tab active" data-content="pollutants" onclick="currentPollutants()">
+                                Current Pollutants
+                            </h2>
+                            <h2 id="aqi" class="tab" data-content="scale" onclick="aqi()">
+                                Air Quality Scale
+                            </h2>
+                            <script>
+                                function currentPollutants() {
+                                    $("#current-pollutants").addClass("active");
+                                    $("#aqi").removeClass("active");
+                                    $("#aqi_content").css("display","none");
+                                    $("#current_pollutants_content").css("display","");
+                                }
+                                function aqi() {
+                                    $("#current-pollutants").removeClass("active");
+                                    $("#aqi").addClass("active");
+                                    $("#aqi_content").css("display", "");
+                                    $("#current_pollutants_content").css("display", "none");
+                                }
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <div id="current_pollutants_content" class="tabs-content">
+                    <div id="pollutants" class="tab-content pollutants">
+
+                        <div class="air-quality-pollutant new-colors" data-qa="airQualityPollutantPM2_5">
+                            <h3 class="column">
+                                <div class="display-type">
+                                    PM <sub conditional="PM">2.5</sub>
+                                </div>
+                                <div class="category-color-bar fair"></div>
+                                <div class="category">Fair</div>
+                            </h3>
+                            <div class="column mobile-middle">
+                                <div class="pollutant-index">31</div>
+                                <div class="pollutant-concentration">9 µg/m³</div>
+                            </div>
+                            <h4 class="column">
+                                <div class="statement-wrapper statement-expand">
+                                    <div class="statement">
+
+
+                                        <a class="statement-link" rel="noopener noreferrer" target="_blank" href="https://air.plumelabs.com/learn/en/particulate-matter?utm_source=accuweather&amp;utm_medium=pm25&amp;utm_campaign=aq_page#ae16">
+                                            Fine Particulate Matter <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
+                                                <defs>
+                                                    <filter id="eg1bz4m6ra">
+                                                        <feColorMatrix in="SourceGraphic" values="0 0 0 0 0.000000 0 0 0 0 0.000000 0 0 0 0 0.000000 0 0 0 1.000000 0"></feColorMatrix>
+                                                    </filter>
+                                                </defs>
+                                                <g fill="none" fill-rule="evenodd">
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <g>
+                                                                    <g filter="url(#eg1bz4m6ra)" transform="translate(-387 -175) translate(1) translate(0 48) translate(0 108) translate(283 16)">
+                                                                        <g>
+                                                                            <path fill="#757575" d="M4.025 1.258v1.51H1.5v7.722h7.7V7.95h1.5v3.295c0 .417-.336.755-.75.755H.75c-.2.007-.395-.07-.538-.214-.142-.143-.219-.339-.212-.541V2.013c-.007-.203.07-.399.212-.542.143-.143.337-.22.538-.213h3.275zM11.549 0l.1.05h.05l.2.202v.05c.025.025.025.05.05.1.002.02.01.038.025.05v.076c.02.048.029.1.025.151v4.704c0 .417-.336.755-.75.755s-.75-.338-.75-.755V2.49L7.175 5.836c-.133.15-.326.233-.525.227-.198-.003-.387-.085-.525-.227C5.98 5.7 5.9 5.508 5.9 5.308s.081-.39.225-.528l3.324-3.27H6.575c-.414 0-.75-.339-.75-.755 0-.417.336-.755.75-.755h4.974z" transform="translate(103 3)"></path>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </a> are
+                                        inhalable pollutant particles with a diameter less than
+                                        2.5 micrometers that can enter the lungs and bloodstream, resulting in serious health issues.
+                                        The most severe impacts are on the lungs and heart. Exposure can result in coughing or
+                                        difficulty breathing, aggravated asthma, and the development of chronic respiratory disease.
+
+
+                                    </div>
+                                    <div class="show-more-statement">
+                                        <span class="ellipsis">...</span>more
+                                    </div>
+                                </div>
+                            </h4>
+                            <div class="column desktop-left">
+                                <div class="pollutant-index">31</div>
+                                <div class="pollutant-concentration">9 µg/m³</div>
+                            </div>
+                        </div>
+
+
+                        <div class="air-quality-pollutant new-colors" data-qa="airQualityPollutantPM10">
+                            <h3 class="column">
+                                <div class="display-type">
+                                    PM <sub conditional="PM">10</sub>
+                                </div>
+                                <div class="category-color-bar fair"></div>
+                                <div class="category">Fair</div>
+                            </h3>
+                            <div class="column mobile-middle">
+                                <div class="pollutant-index">22</div>
+                                <div class="pollutant-concentration">17 µg/m³</div>
+                            </div>
+                            <h4 class="column">
+                                <div class="statement-wrapper statement-expand">
+                                    <div class="statement">
+
+
+                                        <a class="statement-link" rel="noopener noreferrer" target="_blank" href="https://air.plumelabs.com/learn/en/particulate-matter?utm_source=accuweather&amp;utm_medium=pm10&amp;utm_campaign=aq_page#ae16">
+                                            Particulate Matter <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
+                                                <defs>
+                                                    <filter id="eg1bz4m6ra">
+                                                        <feColorMatrix in="SourceGraphic" values="0 0 0 0 0.000000 0 0 0 0 0.000000 0 0 0 0 0.000000 0 0 0 1.000000 0"></feColorMatrix>
+                                                    </filter>
+                                                </defs>
+                                                <g fill="none" fill-rule="evenodd">
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <g>
+                                                                    <g filter="url(#eg1bz4m6ra)" transform="translate(-387 -175) translate(1) translate(0 48) translate(0 108) translate(283 16)">
+                                                                        <g>
+                                                                            <path fill="#757575" d="M4.025 1.258v1.51H1.5v7.722h7.7V7.95h1.5v3.295c0 .417-.336.755-.75.755H.75c-.2.007-.395-.07-.538-.214-.142-.143-.219-.339-.212-.541V2.013c-.007-.203.07-.399.212-.542.143-.143.337-.22.538-.213h3.275zM11.549 0l.1.05h.05l.2.202v.05c.025.025.025.05.05.1.002.02.01.038.025.05v.076c.02.048.029.1.025.151v4.704c0 .417-.336.755-.75.755s-.75-.338-.75-.755V2.49L7.175 5.836c-.133.15-.326.233-.525.227-.198-.003-.387-.085-.525-.227C5.98 5.7 5.9 5.508 5.9 5.308s.081-.39.225-.528l3.324-3.27H6.575c-.414 0-.75-.339-.75-.755 0-.417.336-.755.75-.755h4.974z" transform="translate(103 3)"></path>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </a> are
+                                        inhalable pollutant particles with a diameter less than 10 micrometers.
+                                        Particles that are larger than 2.5 micrometers can be deposited in airways, resulting in
+                                        health issues. Exposure can result in eye and throat irritation, coughing or difficulty
+                                        breathing, and aggravated asthma. More frequent and excessive exposure can result in more
+                                        serious health effects.
+
+
+                                    </div>
+                                    <div class="show-more-statement">
+                                        <span class="ellipsis">...</span>more
+                                    </div>
+                                </div>
+                            </h4>
+                            <div class="column desktop-left">
+                                <div class="pollutant-index">22</div>
+                                <div class="pollutant-concentration">17 µg/m³</div>
+                            </div>
+                        </div>
+
+
+                        <div class="air-quality-pollutant new-colors" data-qa="airQualityPollutantO3">
+                            <h3 class="column">
+                                <div class="display-type">
+                                    O <sub conditional="O">3</sub>
+                                </div>
+                                <div class="category-color-bar excellent"></div>
+                                <div class="category">Excellent</div>
+                            </h3>
+                            <div class="column mobile-middle">
+                                <div class="pollutant-index">18</div>
+                                <div class="pollutant-concentration">53 µg/m³</div>
+                            </div>
+                            <h4 class="column">
+                                <div class="statement-wrapper">
+                                    <div class="statement">
+
+
+                                        Ground-level <a class="statement-link" rel="noopener noreferrer" target="_blank" href="https://air.plumelabs.com/learn/en/ozone?utm_source=accuweather&amp;utm_medium=o3&amp;utm_campaign=aq_page#ae16">
+                                            Ozone <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
+                                                <defs>
+                                                    <filter id="eg1bz4m6ra">
+                                                        <feColorMatrix in="SourceGraphic" values="0 0 0 0 0.000000 0 0 0 0 0.000000 0 0 0 0 0.000000 0 0 0 1.000000 0"></feColorMatrix>
+                                                    </filter>
+                                                </defs>
+                                                <g fill="none" fill-rule="evenodd">
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <g>
+                                                                    <g filter="url(#eg1bz4m6ra)" transform="translate(-387 -175) translate(1) translate(0 48) translate(0 108) translate(283 16)">
+                                                                        <g>
+                                                                            <path fill="#757575" d="M4.025 1.258v1.51H1.5v7.722h7.7V7.95h1.5v3.295c0 .417-.336.755-.75.755H.75c-.2.007-.395-.07-.538-.214-.142-.143-.219-.339-.212-.541V2.013c-.007-.203.07-.399.212-.542.143-.143.337-.22.538-.213h3.275zM11.549 0l.1.05h.05l.2.202v.05c.025.025.025.05.05.1.002.02.01.038.025.05v.076c.02.048.029.1.025.151v4.704c0 .417-.336.755-.75.755s-.75-.338-.75-.755V2.49L7.175 5.836c-.133.15-.326.233-.525.227-.198-.003-.387-.085-.525-.227C5.98 5.7 5.9 5.508 5.9 5.308s.081-.39.225-.528l3.324-3.27H6.575c-.414 0-.75-.339-.75-.755 0-.417.336-.755.75-.755h4.974z" transform="translate(103 3)"></path>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </a> can aggravate existing respiratory
+                                        diseases and also lead to throat irritation, headaches, and chest pain.
+
+
+                                    </div>
+                                    <div class="show-more-statement">
+                                        <span class="ellipsis">...</span>more
+                                    </div>
+                                </div>
+                            </h4>
+                            <div class="column desktop-left">
+                                <div class="pollutant-index">18</div>
+                                <div class="pollutant-concentration">53 µg/m³</div>
+                            </div>
+                        </div>
+
+
+                        <div class="air-quality-pollutant new-colors" data-qa="airQualityPollutantSO2">
+                            <h3 class="column">
+                                <div class="display-type">
+                                    SO <sub conditional="SO">2</sub>
+                                </div>
+                                <div class="category-color-bar excellent"></div>
+                                <div class="category">Excellent</div>
+                            </h3>
+                            <div class="column mobile-middle">
+                                <div class="pollutant-index">4</div>
+                                <div class="pollutant-concentration">4 µg/m³</div>
+                            </div>
+                            <h4 class="column">
+                                <div class="statement-wrapper">
+                                    <div class="statement">
+
+                                        Exposure to Sulfur Dioxide can lead to throat and eye irritation and aggravate asthma as well as chronic bronchitis.
+
+                                    </div>
+                                    <div class="show-more-statement">
+                                        <span class="ellipsis">...</span>more
+                                    </div>
+                                </div>
+                            </h4>
+                            <div class="column desktop-left">
+                                <div class="pollutant-index">4</div>
+                                <div class="pollutant-concentration">4 µg/m³</div>
+                            </div>
+                        </div>
+
+
+                        <div class="air-quality-pollutant new-colors" data-qa="airQualityPollutantNO2">
+                            <h3 class="column">
+                                <div class="display-type">
+                                    NO <sub conditional="NO">2</sub>
+                                </div>
+                                <div class="category-color-bar excellent"></div>
+                                <div class="category">Excellent</div>
+                            </h3>
+                            <div class="column mobile-middle">
+                                <div class="pollutant-index">2</div>
+                                <div class="pollutant-concentration">1 µg/m³</div>
+                            </div>
+                            <h4 class="column">
+                                <div class="statement-wrapper statement-expand">
+                                    <div class="statement">
+
+
+                                        Breathing in high levels of <a class="statement-link" rel="noopener noreferrer" target="_blank" href="https://air.plumelabs.com/learn/en/no2?utm_source=accuweather&amp;utm_medium=no2&amp;utm_campaign=aq_page#ae16">
+                                            Nitrogen Dioxide <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
+                                                <defs>
+                                                    <filter id="eg1bz4m6ra">
+                                                        <feColorMatrix in="SourceGraphic" values="0 0 0 0 0.000000 0 0 0 0 0.000000 0 0 0 0 0.000000 0 0 0 1.000000 0"></feColorMatrix>
+                                                    </filter>
+                                                </defs>
+                                                <g fill="none" fill-rule="evenodd">
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <g>
+                                                                    <g filter="url(#eg1bz4m6ra)" transform="translate(-387 -175) translate(1) translate(0 48) translate(0 108) translate(283 16)">
+                                                                        <g>
+                                                                            <path fill="#757575" d="M4.025 1.258v1.51H1.5v7.722h7.7V7.95h1.5v3.295c0 .417-.336.755-.75.755H.75c-.2.007-.395-.07-.538-.214-.142-.143-.219-.339-.212-.541V2.013c-.007-.203.07-.399.212-.542.143-.143.337-.22.538-.213h3.275zM11.549 0l.1.05h.05l.2.202v.05c.025.025.025.05.05.1.002.02.01.038.025.05v.076c.02.048.029.1.025.151v4.704c0 .417-.336.755-.75.755s-.75-.338-.75-.755V2.49L7.175 5.836c-.133.15-.326.233-.525.227-.198-.003-.387-.085-.525-.227C5.98 5.7 5.9 5.508 5.9 5.308s.081-.39.225-.528l3.324-3.27H6.575c-.414 0-.75-.339-.75-.755 0-.417.336-.755.75-.755h4.974z" transform="translate(103 3)"></path>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </a> increases the risk of
+                                        respiratory problems. Coughing and difficulty breathing are common and
+                                        more serious health issues such as respiratory infections can occur with longer exposure.
+
+
+                                    </div>
+                                    <div class="show-more-statement">
+                                        <span class="ellipsis">...</span>more
+                                    </div>
+                                </div>
+                            </h4>
+                            <div class="column desktop-left">
+                                <div class="pollutant-index">2</div>
+                                <div class="pollutant-concentration">1 µg/m³</div>
+                            </div>
+                        </div>
+
+
+                        <div class="air-quality-pollutant new-colors" data-qa="airQualityPollutantCO">
+                            <h3 class="column">
+                                <div class="display-type">
+                                    CO <sub conditional="CO"></sub>
+                                </div>
+                                <div class="category-color-bar excellent"></div>
+                                <div class="category">Excellent</div>
+                            </h3>
+                            <div class="column mobile-middle">
+                                <div class="pollutant-index">1</div>
+                                <div class="pollutant-concentration">143 µg/m³</div>
+                            </div>
+                            <h4 class="column">
+                                <div class="statement-wrapper">
+                                    <div class="statement">
+
+                                        Carbon Monoxide is a colorless and odorless gas and when inhaled at high levels can cause headache, nausea, dizziness, and vomiting. Repeated long-term exposure can lead to heart disease
+
+                                    </div>
+                                    <div class="show-more-statement">
+                                        <span class="ellipsis">...</span>more
+                                    </div>
+                                </div>
+                            </h4>
+                            <div class="column desktop-left">
+                                <div class="pollutant-index">1</div>
+                                <div class="pollutant-concentration">143 µg/m³</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="aqi_content" class="tabs-content" style="display:none">
+                    <div id="scale" class="tab-content scale">
+                        <div class="scale-item">
+                            <div class="top-row">
+                                <div>
+                                    <div class="category-color-bar" style="background: #1DCFFF;"></div>
+                                    <div class="category">Excellent</div>
+                                </div>
+                                <div class="range">0 - 19</div>
+                            </div>
+                            <div class="statement">The air quality is ideal for most individuals; enjoy your normal outdoor activities.</div>
+                        </div>
+                        <div class="scale-item">
+                            <div class="top-row">
+                                <div>
+                                    <div class="category-color-bar" style="background: #43D357;"></div>
+                                    <div class="category">Fair</div>
+                                </div>
+                                <div class="range">20 - 49</div>
+                            </div>
+                            <div class="statement">The air quality is generally acceptable for most individuals. However, sensitive groups may experience minor to moderate symptoms from long-term exposure.</div>
+                        </div>
+                        <div class="scale-item">
+                            <div class="top-row">
+                                <div>
+                                    <div class="category-color-bar" style="background: #FDB80D;"></div>
+                                    <div class="category">Poor</div>
+                                </div>
+                                <div class="range">50 - 99</div>
+                            </div>
+                            <div class="statement">The air has reached a high level of pollution and is unhealthy for sensitive groups. Reduce time spent outside if you are feeling symptoms such as difficulty breathing or throat irritation.</div>
+                        </div>
+                        <div class="scale-item">
+                            <div class="top-row">
+                                <div>
+                                    <div class="category-color-bar" style="background: #E9365A;"></div>
+                                    <div class="category">Unhealthy</div>
+                                </div>
+                                <div class="range">100 - 149</div>
+                            </div>
+                            <div class="statement">Health effects can be immediately felt by sensitive groups. Healthy individuals may experience difficulty breathing and throat irritation with prolonged exposure. Limit outdoor activity.</div>
+                        </div>
+                        <div class="scale-item">
+                            <div class="top-row">
+                                <div>
+                                    <div class="category-color-bar" style="background: #A829D4;"></div>
+                                    <div class="category">Very Unhealthy</div>
+                                </div>
+                                <div class="range">150 - 249</div>
+                            </div>
+                            <div class="statement">Health effects will be immediately felt by sensitive groups and should avoid outdoor activity. Healthy individuals are likely to experience difficulty breathing and throat irritation; consider staying indoors and rescheduling outdoor activities.</div>
+                        </div>
+                        <div class="scale-item">
+                            <div class="top-row">
+                                <div>
+                                    <div class="category-color-bar" style="background: #6A0AFF;"></div>
+                                    <div class="category">Dangerous</div>
+                                </div>
+                                <div class="range">250+</div>
+                            </div>
+                            <div class="statement">Any exposure to the air, even for a few minutes, can lead to serious health effects on everybody. Avoid outdoor activities.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
 </div>
+
 <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 <script>
     var currentEDID = 0;
@@ -591,7 +1000,7 @@
                 x: ex,
                 y: data.TEMPERATURE
             });
-            temperatureChart.options.data[0].legendText = " Temperature " + data.TEMPERATURE + "°C";
+            temperatureChart.options.data[0].legendText = " Temperature " + data.TEMPERATURE + " °C";
             temperatureChart.render();
 
             /////////////////////////////////////////
@@ -601,7 +1010,7 @@
                 x: ex,
                 y: data.CARBONMONOXIDE
             });
-            carbonChart.options.data[0].legendText = " Carbon Monoxide " + data.CARBONMONOXIDE + "169 µg/m³";
+            carbonChart.options.data[0].legendText = " Carbon Monoxide " + data.CARBONMONOXIDE + " 169 µg/m³";
             carbonChart.render();
 
             /////////////////////////////////////////
@@ -611,7 +1020,7 @@
                 x: ex,
                 y: data.NITROGENOXIDE
             });
-            NitrogenChart.options.data[0].legendText = " Nitrogen Oxide " + data.NITROGENOXIDE + "1 µg/m³";
+            NitrogenChart.options.data[0].legendText = " Nitrogen Oxide " + data.NITROGENOXIDE + " 1 µg/m³";
             NitrogenChart.render();
 
             /////////////////////////////////////////
