@@ -33,4 +33,26 @@ namespace AirWatch.Models
         public Nullable<decimal> AQI { get; set; }
         public string AQICATEGORY { get; set; }
     }
+
+    public partial class TBL_ENVIRONMENTDATAOUT
+    {
+        public System.Guid ENVIRONMENTDATEID { get; set; }
+        public int EDID { get; set; }
+        public int HUMIDITY { get; set; }
+        public int AMMONIA { get; set; }
+        public int SULFURDIOXICE { get; set; }
+        public int TEMPERATURE { get; set; }
+        public int CARBONMONOXIDE { get; set; }
+        public int NITROGENOXIDE { get; set; }
+        public bool ISDISPLAYED { get; set; }
+        public string CREATEDDATE { get; set; }
+        public string CREATEDBY { get; set; }
+        public Nullable<System.DateTime> UPDATEDDATE { get; set; }
+        public string UPDATEDBY { get; set; }
+        public Nullable<decimal> SO2CONCENTRATION { get; set; }
+        public Nullable<decimal> COCONCENTRATION { get; set; }
+        public Nullable<decimal> NOXCONCENTRATION { get; set; }
+        public Nullable<decimal> AQI { get; set; }
+        public string AQICATEGORY { get; set; }
+    }
 }

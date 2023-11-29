@@ -8,17 +8,46 @@ namespace AirWatch.Repository
 {
     public class EnvironmentDataRepository
     {
-        public static List<TBL_ENVIRONMENTDATA> GetTop100()
+        public static List<TBL_ENVIRONMENTDATAOUT> GetTop100()
         {
             AirWatchDBEntities airWatchDBEntities = new AirWatchDBEntities();
             List<TBL_ENVIRONMENTDATA> top100Data = airWatchDBEntities.TBL_ENVIRONMENTDATA
-                .OrderByDescending(env => env.EDID)
+                .OrderBy(env => env.EDID)
                 .Take(100)
                 .ToList();
 
             top100Data = top100Data.OrderBy(env => env.EDID).ToList();
 
-            return top100Data;
+            List<TBL_ENVIRONMENTDATAOUT> output = new List<TBL_ENVIRONMENTDATAOUT>();
+
+            foreach(var data in top100Data)
+            {
+                var jsonData = new TBL_ENVIRONMENTDATAOUT()
+                {
+                    ENVIRONMENTDATEID = data.ENVIRONMENTDATEID,
+                    EDID = data.EDID,
+                    HUMIDITY = data.HUMIDITY,
+                    AMMONIA = data.AMMONIA,
+                    SULFURDIOXICE = data.SULFURDIOXICE,
+                    TEMPERATURE = data.TEMPERATURE,
+                    CARBONMONOXIDE = data.CARBONMONOXIDE,
+                    NITROGENOXIDE = data.NITROGENOXIDE,
+                    ISDISPLAYED = data.ISDISPLAYED,
+                    CREATEDDATE = data.CREATEDDATE.ToString("yyyy-MM-ddTHH:mm:ss"), // Convert to string in the desired format
+                    CREATEDBY = data.CREATEDBY,
+                    UPDATEDDATE = data.UPDATEDDATE,
+                    UPDATEDBY = data.UPDATEDBY,
+                    SO2CONCENTRATION = data.SO2CONCENTRATION,
+                    COCONCENTRATION = data.COCONCENTRATION,
+                    NOXCONCENTRATION = data.NOXCONCENTRATION,
+                    AQI = data.AQI,
+                    AQICATEGORY = data.AQICATEGORY
+                };
+
+                output.Add(jsonData);
+            }
+
+            return output;
         }
         public static TBL_ENVIRONMENTDATA GetLatest()
         {

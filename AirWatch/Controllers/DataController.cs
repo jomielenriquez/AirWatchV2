@@ -46,14 +46,35 @@ namespace AirWatch.Controllers
 
             //Data newdata = new Data();
             //string result = newdata.Save(data, new List<string> { "ENVIRONMENTDATEID" }, "ENVIRONMENTDATEID");
+            var jsonData = new TBL_ENVIRONMENTDATAOUT()
+            {
+                ENVIRONMENTDATEID = data.ENVIRONMENTDATEID,
+                EDID = data.EDID,
+                HUMIDITY = data.HUMIDITY,
+                AMMONIA = data.AMMONIA,
+                SULFURDIOXICE = data.SULFURDIOXICE,
+                TEMPERATURE = data.TEMPERATURE,
+                CARBONMONOXIDE = data.CARBONMONOXIDE,
+                NITROGENOXIDE = data.NITROGENOXIDE,
+                ISDISPLAYED = data.ISDISPLAYED,
+                CREATEDDATE = data.CREATEDDATE.ToString("yyyy-MM-ddTHH:mm:ss"), // Convert to string in the desired format
+                CREATEDBY = data.CREATEDBY,
+                UPDATEDDATE = data.UPDATEDDATE,
+                UPDATEDBY = data.UPDATEDBY,
+                SO2CONCENTRATION = data.SO2CONCENTRATION,
+                COCONCENTRATION = data.COCONCENTRATION,
+                NOXCONCENTRATION = data.NOXCONCENTRATION,
+                AQI = data.AQI,
+                AQICATEGORY = data.AQICATEGORY
+            };
 
-            return Json(data, JsonRequestBehavior.AllowGet);
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
         [System.Web.Http.HttpGet]
         public JsonResult GetOneHundred()
         {
             // will return count 0 if no data
-            List<TBL_ENVIRONMENTDATA> EnvData = EnvironmentDataRepository.GetTop100();
+            List<TBL_ENVIRONMENTDATAOUT> EnvData = EnvironmentDataRepository.GetTop100();
 
             return Json(EnvData, JsonRequestBehavior.AllowGet);
         }

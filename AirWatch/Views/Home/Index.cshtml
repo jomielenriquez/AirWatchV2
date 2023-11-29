@@ -6,9 +6,9 @@
 <style>
     .gauge-wrapper {
         display: table;
-        margin: 0 auto;
+        margin-left: 10%;
         background: #77cc9b;
-        padding: 35px 40px 40px;
+        padding: 45px 50px 50px;
         border-radius: 6px;
         box-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.32), 0 1px 9px -1px #15222e;
         margin-top: 123px;
@@ -149,7 +149,8 @@
     });
 </script>
 <div class="bs-docs-section">
-    <div class="gauge-wrapper">
+    <div class="container" style="display: flex; justify-content: space-between;">
+    <div class="gauge-wrapper" style="flex: 1; margin-right: 20px;">
         <div class="gauge-title"><b>Air Quality Index</b></div>
         <div class="gauge">
             <div class="gauge-slice-colors">
@@ -159,11 +160,18 @@
                 <div class="gauge-st gauge-slice-item"></div>
                 <div class="gauge-st gauge-slice-item"></div>
             </div>
-            <div class="needle"></div>
-            <div class="gauge-center"></div>
+            <div class="needle" style="transform: rotate(21.6deg);"></div>
+            <div class="gauge-center" data-value="22"></div>
         </div>
-        <div class="gauge-category" id="gauge-result">Result</div>
+        <div class="gauge-category" id="gauge-result">Satisfactory                                      </div>
     </div>
+    <div style="flex: 0 0 80%;">
+        <div style="margin-left: 5%; margin-top: 12%;">
+        <img style="width: 60%;" src="https://scontent.fcrk3-1.fna.fbcdn.net/v/t1.15752-9/386886017_1375948913321098_1787089673909830171_n.png?_nc_cat=109&amp;ccb=1-7&amp;_nc_sid=8cd0a2&amp;_nc_eui2=AeGbBqf1CZmtgbnuWxcZ-iZUk6S7__npiYOTpLv_-emJgyPlJM5qNZrRaKREmHsVw--nTJ3-GTH7bro24LLacK53&amp;_nc_ohc=v_eYmTdlwjQAX-65YTW&amp;_nc_ht=scontent.fcrk3-1.fna&amp;oh=03_AdSstJxAuDGfFq-t_fvPQxokpD_YJj8ukcZ1up3cWV85Qw&amp;oe=658A57EB" alt="">
+    </div>
+    </div>
+</div>
+
     <br />
 
     <div class="row">
@@ -234,7 +242,7 @@
     <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
-            <div class="air-quality-current-pollutants pollutants">
+            @* <div class="air-quality-current-pollutants pollutants">
                 <div class="tabs-nav">
 
                     <div class="horizontal-menu tabs">
@@ -634,7 +642,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> *@
         </div>
         <div class="col-lg-2"></div>
     </div>
@@ -944,17 +952,17 @@
         }
 
         function microsoftJsonDateToJsDate(msJsonDate) {
-            // Extract the numeric part (ticks) from the string
-            const match = /\/Date\((\d+)\)\//.exec(msJsonDate);
-            if (!match || match.length < 2) {
-                throw new Error('Invalid Microsoft JSON Date format.');
-            }
+            //// Extract the numeric part (ticks) from the string
+            //const match = /\/Date\((\d+)\)\//.exec(msJsonDate);
+            //if (!match || match.length < 2) {
+            //    throw new Error('Invalid Microsoft JSON Date format.');
+            //}
 
-            // Convert the ticks to milliseconds
-            const ticks = parseInt(match[1], 10);
+            //// Convert the ticks to milliseconds
+            //const ticks = parseInt(match[1], 10);
 
             // Create a JavaScript Date object using the milliseconds (interpreted as UTC)
-            const jsDateUtc = new Date(ticks);
+            const jsDateUtc = new Date(msJsonDate);
 
             return jsDateUtc;
         }
