@@ -12,7 +12,7 @@ namespace AirWatch.Repository
         {
             AirWatchDBEntities airWatchDBEntities = new AirWatchDBEntities();
             List<TBL_ENVIRONMENTDATA> top100Data = airWatchDBEntities.TBL_ENVIRONMENTDATA
-                .OrderBy(env => env.EDID)
+                .OrderByDescending(env => env.EDID)
                 .Take(100)
                 .ToList();
 
