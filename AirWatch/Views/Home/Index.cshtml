@@ -952,8 +952,10 @@
                         else {
                             $("#notificationBody").text(message);
                         }
-                        audio.volume = 1;
-                        audio.play();
+                        if (message != "") {
+                            audio.volume = 1;
+                            audio.play();
+                        }
                         RenderChartData(data);
                     }
                 },
@@ -1010,7 +1012,7 @@
                 x: ex,
                 y: data.SULFURDIOXICE
             });
-            sulfurChart.options.data[0].legendText = " Sulfur " + data.SULFURDIOXICE + " 4 µg/m³";
+            sulfurChart.options.data[0].legendText = " Sulfur " + data.SULFURDIOXICE + " " + data.SULFURDIOXICE * 4 + " µg/m³";
             sulfurChart.render();
 
             /////////////////////////////////////////
@@ -1030,7 +1032,7 @@
                 x: ex,
                 y: data.CARBONMONOXIDE
             });
-            carbonChart.options.data[0].legendText = " Carbon Monoxide " + data.CARBONMONOXIDE + " 169 µg/m³";
+            carbonChart.options.data[0].legendText = " Carbon Monoxide " + data.CARBONMONOXIDE + " " + data.SULFURDIOXICE * 169 + " µg/m³";
             carbonChart.render();
 
             /////////////////////////////////////////
@@ -1040,7 +1042,7 @@
                 x: ex,
                 y: data.NITROGENOXIDE
             });
-            NitrogenChart.options.data[0].legendText = " Nitrogen Oxide " + data.NITROGENOXIDE + " 1 µg/m³";
+            NitrogenChart.options.data[0].legendText = " Nitrogen Oxide " + data.NITROGENOXIDE + " µg/m³";
             NitrogenChart.render();
 
             /////////////////////////////////////////

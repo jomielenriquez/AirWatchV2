@@ -7,6 +7,9 @@ using System.Web.Mvc;
 using System.Xml.Linq;
 using AirWatch.Models;
 using AirWatch.Repository;
+using System.Net.Mail;
+using System.Net;
+using System.Web.Services.Description;
 
 namespace AirWatch.Controllers
 {
@@ -133,6 +136,8 @@ namespace AirWatch.Controllers
             //// Convert UTC time to UTC+8
             //DateTime utcPlus8Time = TimeZoneInfo.ConvertTimeFromUtc(utcTime, utcPlus8TimeZone);
 
+            var latestRecord = EnvironmentDataRepository.GetLatest();
+
             TBL_ENVIRONMENTDATA edata = new TBL_ENVIRONMENTDATA() {
                 HUMIDITY = data.humidity,
                 AMMONIA = data.ammonia,
@@ -149,18 +154,121 @@ namespace AirWatch.Controllers
                 //CREATEDDATE = utcPlus8Time
             };
 
-            string result =  newdata.Save(edata, new List<string> { "ENVIRONMENTDATEID" }, "ENVIRONMENTDATEID");
+            var humidityLimit = 100;
+            var ammoniaLimit = 450;
+            var sulfurLimit = 50;
+            var temperatureLimit = 100;
+            var carbonMonoxideLimit = 50;
+            var nitrogenOxideLimit = 50;
+
+            List<PollutantReading> PollutantList = new List<PollutantReading>();
+
+            if (edata.AMMONIA > ammoniaLimit)
+            {
+                PollutantList.Add(new PollutantReading()
+                {
+                    Pollutant = "Ammonia",
+                    Level = "High",
+                    Value = $"{edata.AMMONIA} "
+
+                });
+            }
+            if (edata.CARBONMONOXIDE > carbonMonoxideLimit)
+            {
+                PollutantList.Add(new PollutantReading()
+                {
+                    Pollutant = "Carbon Monoxide",
+                    Level = "High",
+                    Value = $"{edata.CARBONMONOXIDE * 169} ug/m^3"
+
+                });
+            }
+            if (edata.NITROGENOXIDE > nitrogenOxideLimit)
+            {
+                PollutantList.Add(new PollutantReading()
+                {
+                    Pollutant = "Nitrogen Oxide",
+                    Level = "High",
+                    Value = $"{edata.NITROGENOXIDE} ug/m^3"
+
+                });
+            }
+            if (edata.SULFURDIOXICE > sulfurLimit)
+            {
+                PollutantList.Add(new PollutantReading()
+                {
+                    Pollutant = "Sulfur Dioxide",
+                    Level = "High",
+                    Value = $"{edata.SULFURDIOXICE * 4} ug/m^3"
+
+                });
+            }
+
+            if (PollutantList.Count > 0)
+            {
+                SendEmail(edata.CREATEDDATE, PollutantList);
+            }
+            
+            if (latestRecord.HUMIDITY != edata.HUMIDITY || latestRecord.AMMONIA != edata.AMMONIA || latestRecord.SULFURDIOXICE != edata.SULFURDIOXICE || latestRecord.TEMPERATURE != edata.TEMPERATURE || latestRecord.CARBONMONOXIDE != edata.CARBONMONOXIDE || latestRecord.NITROGENOXIDE != edata.NITROGENOXIDE || latestRecord.SO2CONCENTRATION != edata.SO2CONCENTRATION || latestRecord.COCONCENTRATION != edata.COCONCENTRATION || latestRecord.NOXCONCENTRATION != edata.NOXCONCENTRATION)
+            {
+                string result =  newdata.Save(edata, new List<string> { "ENVIRONMENTDATEID" }, "ENVIRONMENTDATEID");
+                try
+                {
+                    Guid InsertedGuid = new Guid(result);
+                }
+                catch(Exception ex)
+                {
+                    return Json(new { message = "result", isSucess = false });
+                }
+            }
+
+
+            return Json(new { message = "Success", isSucess = true });
+        }
+
+        public string SendEmail(DateTime dateTime, List<PollutantReading> PollutantList)
+        {
+            // Set your SMTP server and credentials
+            string smtpServer = "smtp.gmail.com";
+            int smtpPort = 587; // This may vary depending on your SMTP server
+            string smtpUsername = "airwatch623@gmail.com";
+            string smtpPassword = "ngyk qcfi cnib bzdz";
+
+            // Create a new instance of SmtpClient
+            SmtpClient smtpClient = new SmtpClient(smtpServer, smtpPort);
+
+            // Set the credentials for authentication
+            smtpClient.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
+
+            // Enable SSL if required by your SMTP server
+            smtpClient.EnableSsl = true;
+
+            // Create a MailMessage object
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.From = new MailAddress("airwatch623@gmail.com");
+            mailMessage.To.Add("airwatch623@gmail.com");
+            mailMessage.Subject = "Air Pollution Detected";
+            mailMessage.Body = $"Reading as of: {dateTime} \n\n<br><br><table><tr><th>Pollutants</th><th>Level</th><th>Measured Value</th></tr>";
+
+            foreach(var poll in PollutantList)
+            {
+                mailMessage.Body += $"<tr><td>{poll.Pollutant}</td><td>{poll.Level}</td><td>{poll.Value}</td></tr>";
+            }
+
+            mailMessage.Body += "</table>\n\n<br><br>Warning! High Level of air pollution has been detected in your area.";
+
+            mailMessage.IsBodyHtml = true;
 
             try
             {
-                Guid InsertedGuid = new Guid(result);
+                // Send the email
+                smtpClient.Send(mailMessage);
+                return "Email sent successfully.";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return Json(new { message = "result", isSucess = false });
+                return $"Error: {ex.Message}";
             }
-
-            return Json(new { message = "Success", isSucess = true });
         }
     }
 }

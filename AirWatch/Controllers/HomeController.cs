@@ -42,6 +42,60 @@ namespace AirWatch.Controllers
             return View(appModel);
         }
 
+        public ActionResult WeeklyAQI(AppModel model)
+        {
+            // This code will return user to the login page if there is no session
+            if (model == null)
+            {
+                model = new AppModel();
+            }
+            AppModel appModel = model;
+            if (appModel.Account == null)
+            {
+                return RedirectToAction("../Login/SignIn");
+            }
+
+            DateTime date = DateTime.Now;
+
+            appModel.AQIReadingList = new List<AQIReading>();
+
+            for (int days = 0; days < 7; days++)
+            {
+                var hold = EnvironmentDataRepository.GetDataByDate(date);
+                decimal? sumAQI = 0;
+                foreach(var data in hold)
+                {
+                    sumAQI += data.AQI;
+                }
+                var AverageAQI = sumAQI > 0 ? sumAQI / hold.Count : 0;
+
+                string AverageAQICategory = AverageAQI >= 0 && AverageAQI <= 50
+                ? "Good"
+                : AverageAQI >= 51 && AverageAQI <= 100
+                    ? "Satisfactory"
+                    : AverageAQI >= 101 && AverageAQI <= 200
+                        ? "Moderately Polluted"
+                        : AverageAQI >= 201 && AverageAQI <= 300
+                            ? "Poor"
+                            : AverageAQI >= 301 && AverageAQI <= 400
+                                ? "Very Poor"
+                                : AverageAQI >= 401 && AverageAQI <= 500
+                                    ? "Severe"
+                                : "Error";
+
+                appModel.AQIReadingList.Add(new AQIReading()
+                {
+                    AQI = AverageAQI,
+                    DateTime = date,
+                    AQICategory = AverageAQICategory
+                });
+
+                date = date.AddDays(-1);
+            }
+
+            return View(appModel);
+        }
+
         public ActionResult Readings(AppModel model)
         {
             if (model == null)

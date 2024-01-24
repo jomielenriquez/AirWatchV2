@@ -128,6 +128,7 @@ namespace AirWatch.Models
         };
         public int ChartTypeSelected { get; set; }
         public List<TBL_ENVIRONMENTDATA> readings { get; set; }
+        public List<AQIReading> AQIReadingList { get; set; }
     }
     public class ChangePass
     {
@@ -138,5 +139,19 @@ namespace AirWatch.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
+    }
+    
+    public class AQIReading
+    {
+        public decimal? AQI { get; set; }
+        public string AQICategory { get; set; }
+        public DateTime DateTime { get; set; }
+    }
+
+    public class PollutantReading
+    {
+        public string Pollutant { get; set; }
+        public string Level { get; set; }
+        public string Value { get; set; }
     }
 }
